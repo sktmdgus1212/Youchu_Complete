@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>유투버 추천</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="./base.css">
+	</head>
+	<body>
+		<div id="container">
+			
+			<aside id="left-sidebar">
+				<div id = "left-container-1">
+					<h3>유투버를 검색하세요.</h3>		
+					<form action = "/search_youtuber" method = "post">
+						<input type ="text" size="35" placeholder="크리에이터 이름을 검색하세요">
+						<input type = "button" value = "검색">
+					</form>	
+				</div>
+
+				<div id = "left-container-2"><h3>유투버 검색결과</h3></div>
+				<div id = "left-container-2"><h3>내가 선택한 유투버 목록</h3></div>
+      		</aside>
+			
+			<section id="contents">
+				<h2>유투버 추천 결과</h2>
+      		</section>
+              
+			<aside id="right-sidebar">
+				<div id = "left-container-1">
+					<h3>영상 태그를 검색하세요.</h3>
+					<form action = "/search_tag" method = "post">
+						<input type ="text" size="25" placeholder="동영상 태그를 검색하세요">
+						<input type = "button" value = "검색">
+					</form>
+				</div>
+				<div id = "left-container-2"><h3>태그 검색결과</h3></div>
+				<div id = "left-container-2"><h3>내가 선택한 태그 목록</h3></div>		
+     		 </aside>
+		</div>
+	</body>
+</html>
