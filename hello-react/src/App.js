@@ -1,9 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import './App.css';
+import Search_Youtuber from './components/Search_Youtuber';
+import Search_Tag from './components/Search_Tag';
+import Result_Youtuber from './components/Result_Youtuber';
 
 function App() {
   // 요청받은 정보를 담아줄 변수 선언
@@ -13,7 +13,7 @@ function App() {
   function callback(str) {
     setTestStr(str);
   }
-
+  
   // 첫 번째 렌더링을 마친 후 실행
   useEffect(
       () => {
@@ -25,16 +25,14 @@ function App() {
         })
       }, []
   );
-
+ 
   return (
-      <div className="App">
-          <header className="App-header">
-              {testStr}
-          </header>
-      </div>
+    <div className="App">
+    <Search_Youtuber></Search_Youtuber>
+    <Result_Youtuber></Result_Youtuber>
+    <Search_Tag></Search_Tag>
+   </div>
   );
 }
 
 export default App;
-
-
