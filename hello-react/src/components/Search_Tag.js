@@ -1,5 +1,5 @@
 import React, {Component} from'react';
-import Lefttop from './minicomponents/Lefttop';
+import Rightttop from './minicomponents/Righttop';
 
 class Search_Tag extends Component{
     render(){
@@ -30,14 +30,21 @@ class Search_Tag extends Component{
         return(
             <aside style = {rightSidebar}>
                 <div style= {leftContainer1}>
-                    <h3>영상 태그를 검색하세요.</h3>		
+                    <h2>영상 태그를 검색하세요.</h2>		
                     <form action = "/search_youtuber" method = "post">
                         <input type ="text" size="35" placeholder="크리에이터 이름을 검색하세요"></input>
                         <input type = "button" value = "검색"></input>
                     </form>
                 </div>
-                <div style = {leftContainer2}><h3>영상 태그 검색결과</h3><Lefttop></Lefttop></div>
-				<div style = {leftContainer2}><h3>내가 선택한 영상 목록</h3></div>	
+                <div style = {leftContainer2}>
+                    <h2>관련 영상 태그 검색결과</h2>
+                    <hr></hr>
+                    <Rightttop tag = "축구"></Rightttop>
+                    <Rightttop tag = "롤"></Rightttop>
+                    <Rightttop tag = "올림픽"></Rightttop>
+                    
+                </div>
+				<div style = {leftContainer2}><h2>내가 선택한 영상 태그 목록</h2></div>	
             
             </aside>
         );
