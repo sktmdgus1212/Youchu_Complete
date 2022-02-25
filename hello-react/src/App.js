@@ -28,7 +28,9 @@ function App() {
  
   return (
     <div className="App">
-    <Search_Youtuber></Search_Youtuber>
+    <Search_Youtuber onSubmit = {function(_title){
+              console.log(_title);
+          }.bind(this)}></Search_Youtuber>
     <Result_Youtuber></Result_Youtuber>
     <Search_Tag></Search_Tag>
    </div>

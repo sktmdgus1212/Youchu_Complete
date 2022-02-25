@@ -43,10 +43,22 @@ class Search_Youtuber extends Component{
         return(
             <aside style = {leftSidebar}>
                 <div style= {leftContainer1}>
-                    <h2>유투버를 검색하세요.</h2>		
-                    <form action = "/search_youtuber" method = "post">
-                        <input type ="text" size="35" placeholder="크리에이터 이름을 검색하세요"></input>
-                        <input type = "button" value = "검색"></input>
+                <h2>유투버를 검색하세요.</h2>		
+                    <form action = "/search_youtuber" 
+                            method = "post"
+                            onSubmit = { function(e) {
+                                e.preventDefault();
+                                this.props.onSubmit(
+                                    e.target.title.value
+                                );
+                                alert('Submit!');
+                            }.bind(this)} >
+                        <p><input type ="text" 
+                            name="title"
+                            size="35" 
+                            placeholder="크리에이터 이름을 검색하세요">
+                            </input></p>
+                        <p> <input type = "submit" value = "검색"></input></p>
                     </form>
                 </div>
                 <div style = {leftContainer2}>
