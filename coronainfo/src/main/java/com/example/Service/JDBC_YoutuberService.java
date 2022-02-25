@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import com.example.Entity.Youtuber;
-import com.example.Service.JDBC_FindingTag;
+
 @Service
 public class JDBC_YoutuberService implements Youtuber_db {
 
 	 private JDBC_FindingTag jdbc_FindingTag;
 	 private String url = "jdbc:oracle:thin:@localhost:1521/xepdb1"; 
-	 private String uid = "YOUCHU_DB"; 
+	 private String uid = "USER1"; 
 	 private String pwd = "1234"; 
 	 private String driver = "oracle.jdbc.driver.OracleDriver";
 	 
@@ -34,8 +34,7 @@ public class JDBC_YoutuberService implements Youtuber_db {
 		 * dataSource; }
 		 */
 	public ArrayList<Youtuber> getList(String search) throws ClassNotFoundException, SQLException {
-		ArrayList<Youtuber> list = new ArrayList<>();
-
+		ArrayList<Youtuber> list = new ArrayList<>();	
 		String sql = "SELECT * FROM YOUTUBER WHERE LOWER(id) LIKE LOWER('%"+search+"%') OR KOR_NAME LIKE '%"+search+"%'";
 
 		Connection con = DriverManager.getConnection(url, uid, pwd);
