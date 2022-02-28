@@ -45,9 +45,9 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/search_youtuber", method=RequestMethod.POST)
-	public String search_youtuber(@RequestBody Map<String,Object> map) {
+	public Map<String,Object> search_youtuber(@RequestBody Map<String,Object> map) {
 		String na = (String) map.get("name");
 		System.out.print(na+"Ãâ·Â");
-		return na;
+		return map;
 	}  
 }

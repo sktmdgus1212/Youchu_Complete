@@ -1,4 +1,5 @@
 import React, {Component} from'react';
+import axios from 'axios'; // 액시오스
 import Leftbottom from './minicomponents/Leftbottom';
 import Lefttop from './minicomponents/Lefttop';
 
@@ -38,25 +39,48 @@ class Search_Youtuber extends Component{
             
           }
          
-
+          function transmit_youtuber_data(){
+            var frm = new FormData(); 
+            var searchingFile = document.getElementById("search_data").value; 
+            frm.append("name", searchingFile);
+            //테스트용 출력
+            for (var pair of frm.entries()) {
+                console.log(pair[0]+ ', ' + pair[1]);
+              }
+            axios(
+                {
+                  url: '/search_youtuber',
+                  method: 'post',
+                  data: {
+                    frm
+                  } , 
+                  baseURL: 'http://localhost:8080'
+                  //withCredentials: true,
+                }
+              ).then(function (response) {
+                console.log(frm.get("name"))
+              });
+    
+    
+        }    
           
         return(
             <aside style = {leftSidebar}>
                 <div style= {leftContainer1}>
                 <h2>유투버를 검색하세요.</h2>		
-                <form action = "/search_youtuber" 
-                            method = "post"
-                            onSubmit = { function(e) {
+                <form onSubmit = { function(e) {
                                 e.preventDefault();
                                 this.props.onSubmit(
                                     e.target.title.value
                                 );
                                 alert('Submit!');
+                                transmit_youtuber_data();
                             }.bind(this)} >
                         <p><input type ="text" 
                             name="title"
                             size="35" 
-                            placeholder="크리에이터 이름을 검색하세요">
+                            placeholder="크리에이터 이름을 검색하세요"
+                            id="search_data">
                             </input></p>
                         <p> <input type = "submit" value = "검색"></input></p>
                     </form>
