@@ -44,7 +44,7 @@ class Search_Youtuber extends Component{
             <aside style = {leftSidebar}>
                 <div style= {leftContainer1}>
                 <h2>유투버를 검색하세요.</h2>		
-                    <form action = "/search_youtuber" 
+                <form action = "/search_youtuber" 
                             method = "post"
                             onSubmit = { function(e) {
                                 e.preventDefault();

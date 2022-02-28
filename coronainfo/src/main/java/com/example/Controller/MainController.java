@@ -5,13 +5,14 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.Service.Youtuber_db;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @Controller
 public class MainController {
 
@@ -47,6 +48,6 @@ public class MainController {
 	public String search_youtuber(@RequestBody Map<String,Object> map) {
 		String na = (String) map.get("name");
 		System.out.print(na+"Ãâ·Â");
-		return "search_youtuber";
+		return na;
 	}  
 }
