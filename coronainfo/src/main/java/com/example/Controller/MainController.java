@@ -34,11 +34,11 @@ public class MainController {
 	 * @RequestMapping("/home") public String
 	 * home(@RequestParam(name="searching_youtuber", defaultValue = "gamst") String
 	 * search, Model model) throws ClassNotFoundException, SQLException {
-	 * ArrayList<Youtuber> youtuber = youtuber_db.getList(search); // data °¡Á®¿À±â
+	 * ArrayList<Youtuber> youtuber = youtuber_db.getList(search); // data ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * 
 	 * if(youtuber.isEmpty()) { model.addAttribute("youtuber_id", "nothing"); //
-	 * data°¡ ¾øÀ» ¶§ nothing Áý¾î³ÖÀ½ } else { model.addAttribute("youtuber_id",
+	 * dataï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ nothing ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ } else { model.addAttribute("youtuber_id",
 	 * youtuber.get(0).id); model.addAttribute("youtuber_image",
 	 * youtuber.get(0).image);
 	 * model.addAttribute("youtuber_kor_name",youtuber.get(0).kor_name);
@@ -58,20 +58,21 @@ public class MainController {
 	}  
 	
 	@ResponseBody
-	@RequestMapping(value="/searched_result_youtuber", method=RequestMethod.POST)
-	public HashMap<String, JSONObject> searched_result_youtuber() throws ClassNotFoundException, SQLException {
-		
-		ArrayList<Youtuber> youtuber = youtuber_db.getList(search);
-		HashMap<String, JSONObject> jsonall = new HashMap<>();
-		
-		for(int i = 0 ; i < youtuber.size() ; i++) {
-			String id = youtuber.get(i).id;
-			if(jsonall.containsKey(id)) {
+	   @RequestMapping(value="/searched_result_youtuber", method=RequestMethod.POST)
+	   public HashMap<String, JSONObject> searched_result_youtuber() throws ClassNotFoundException, SQLException {
+	      
+	      ArrayList<Youtuber> youtuber = youtuber_db.getList(search);
+	      HashMap<String, JSONObject> jsonall = new HashMap<>();
+	      
+	      for(int i = 0 ; i < youtuber.size() ; i++) {
+	         String id = youtuber.get(i).id;
+	         if(jsonall.containsKey(id)) {
 
-				JSONObject exist_json = jsonall.get(id); //ÇöÀç Á¸ÀçÇÏ´Â object ¹Þ±â
+	            JSONObject exist_json = jsonall.get(id); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ object ï¿½Þ±ï¿½
 
-				JSONArray exist_jsonarr = (JSONArray) exist_json.get("tag"); //object¾È¿¡ ÀÖ´Â array¹Þ±â
-				exist_jsonarr.add(youtuber.get(i).tag); //array¿¡ »õ·Î¿î ÅÂ±× °ª Ãß°¡
+
+				JSONArray exist_jsonarr = (JSONArray) exist_json.get("tag"); //objectï¿½È¿ï¿½ ï¿½Ö´ï¿½ arrayï¿½Þ±ï¿½
+				exist_jsonarr.add(youtuber.get(i).tag); //arrayï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½Â±ï¿½ ï¿½ï¿½ ï¿½ß°ï¿½
 			}
 			else {
 				JSONObject json = new JSONObject();
