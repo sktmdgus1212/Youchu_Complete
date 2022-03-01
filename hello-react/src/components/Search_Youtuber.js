@@ -39,31 +39,25 @@ class Search_Youtuber extends Component{
             
           }
          
-          function transmit_youtuber_data(){
-            var frm = new FormData(); 
+          function transmit_youtuber_data(){ 
             var searchingFile = document.getElementById("search_data").value; 
-            frm.append("name", searchingFile);
-            //테스트용 출력
-            for (var pair of frm.entries()) {
-                console.log(pair[0]+ ', ' + pair[1]);
-              }
             axios(
                 {
+                  headers: {"Content-Type": "application/json"},
                   url: '/search_youtuber',
                   method: 'post',
                   data: {
-                    frm
-                  } , 
+                    name: searchingFile
+                  }, 
                   baseURL: 'http://localhost:8080'
-                  //withCredentials: true,
+                  //withCredentials: true
                 }
               ).then(function (response) {
-                console.log(frm.get("name"))
+                console.log(response.data)
               });
     
-    
         }    
-          
+
         return(
             <aside style = {leftSidebar}>
                 <div style= {leftContainer1}>
