@@ -4,11 +4,19 @@ import Leftbottom from './minicomponents/Leftbottom';
 import Lefttop from './minicomponents/Lefttop';
 
 class Search_Youtuber extends Component{
+   
+   
     constructor(props){
         super(props);
         this.state={
             lists: [],
-            addedlist:[]
+            addedlist:[],
+            x:null,
+            finallist:{
+                image:null,
+                name:[],
+                tags:[]
+            }
         }
         this.ChangeMethod=this.ChangeMethod.bind(this);
        
@@ -23,7 +31,6 @@ class Search_Youtuber extends Component{
     
     render(){
 
-      
 
 
         const leftSidebar= {
@@ -49,48 +56,71 @@ class Search_Youtuber extends Component{
             
           }
          
-          function transmit_youtuber_data(){
-            var frm = new FormData(); 
+          async function transmit_youtuber_data(){
             var searchingFile = document.getElementById("search_data").value; 
-            frm.append("name", searchingFile);
-            //테스트용 출력
-            for (var pair of frm.entries()) {
-                console.log(pair[0]+ ', ' + pair[1]);
-              }
-            axios(
+            
+            
+                try {
+                  //응답 성공 
+                  const response = await axios.post( 'search_youtuber' , {
+                        //보내고자 하는 데이터 
+                        name: searchingFile
+                  } );
+                  
+                  console.log(response);
+                } catch (error) {
+                  //응답 실패
+                  console.error(error);
+                }
+              
+            /*axios(
                 {
                   url: '/search_youtuber',
                   method: 'post',
                   data: {
-                    frm
+                    name: searchingFile
                   } , 
                   baseURL: 'http://localhost:8080'
                   //withCredentials: true,
                 }
               ).then(function (response) {
-                console.log(frm.get("name"))
-              });
-    
-    
+                
+              });*/
         }    
-          
+        async function getData() {
+            try {
+              //응답 성공
+              const response = await axios.get('searched_result_youtuber');
+        
+              this.state.x = response;
+              console.log(response);
+            } catch (error) {
+              //응답 실패
+              console.error(error);
+            }
+          }
+
+            
+
+
+
         return(
             <aside style = {leftSidebar}>
                 <div style= {leftContainer1}>
                 <h2>유투버를 검색하세요.</h2>		
-                <form onSubmit = { function(e) {
+                <form  onSubmit = { function(e) {
                                 e.preventDefault();
                                 this.props.onSubmit(
                                     e.target.title.value
                                 );
-                                alert('Submit!');
                                 transmit_youtuber_data();
                             }.bind(this)} >
                         <p><input type ="text" 
                             name="title"
                             size="35" 
                             placeholder="크리에이터 이름을 검색하세요"
-                            id="search_data">
+                            id="search_data"
+                            >
                             </input></p>
                         <p> <input type = "submit" value = "검색"></input></p>
                     </form>
@@ -99,34 +129,40 @@ class Search_Youtuber extends Component{
                 <div style = {leftContainer2}>
                     <h2>유투버 검색결과</h2>
 
-                    <Lefttop 
+                    <textarea>{this.state.x}</textarea>
+                
+                <ul>
+
+                   <li> <Lefttop 
                         title= "감스트" 
                         tag = "피파, 롤, 개그" 
                         onChangePage = {this.ChangeMethod}>    
-                    </Lefttop>
+                    </Lefttop></li>
                     
-                    <Lefttop 
+                    <li> <Lefttop 
                         title= "정형구tv" 
                         tag = "이산수학, 프로그래밍언어론" 
                         onChangePage = {this.ChangeMethod}> 
-                    </Lefttop>
+                    </Lefttop></li>
 
-                    <Lefttop 
+                    <li>  <Lefttop 
                         title= "김진석tv" 
                         tag = "컴퓨터알고리즘, 인터넷프로그래밍" 
                         onChangePage = {this.ChangeMethod}> 
-                    </Lefttop>
+                    </Lefttop></li>
 
-                    <Lefttop 
+                    <li>  <Lefttop 
                         title= "이병정tv" 
                         tag = "소프트웨어공학, 객체지향프로그래밍" 
                         onChangePage = {this.ChangeMethod}> 
-                    </Lefttop>
-                    
+                    </Lefttop></li>
+
+                    </ul>
                     
                     
                     
                 </div>
+
 				<div style = {leftContainer2}>
                     <h2>내가 선택한 유투버 목록</h2>
                     {this.state.lists}
@@ -138,4 +174,4 @@ class Search_Youtuber extends Component{
     }
 }
 
-export default Search_Youtuber
+export default Search_Youtuber;
