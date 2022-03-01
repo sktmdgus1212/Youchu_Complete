@@ -3,7 +3,6 @@ package com.example.Controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 import org.json.simple.JSONArray;
@@ -73,7 +72,6 @@ public class MainController {
 
 				JSONArray exist_jsonarr = (JSONArray) exist_json.get("tag"); //object안에 있는 array받기
 				exist_jsonarr.add(youtuber.get(i).tag); //array에 새로운 태그 값 추가
-				System.out.print(exist_jsonarr);
 			}
 			else {
 				JSONObject json = new JSONObject();
