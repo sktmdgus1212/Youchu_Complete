@@ -10,10 +10,13 @@ class Search_Youtuber extends Component{
             lists: [],
             addedlist:[],
             x:null,
+
             finallist:{
+                
                 image:null,
-                name:[],
-                tags:[]
+                id:null,
+                kor_name:null,
+                tag:[]
             }
         }
         this.ChangeMethod=this.ChangeMethod.bind(this);
@@ -82,8 +85,11 @@ class Search_Youtuber extends Component{
                   //withCredentials: true
                 }
               ).then(function (response) {
-                console.log(response.data.id)
-              });
+                return response.data;
+              })
+              .then(function(data){
+                console.log(data);
+              }.bind(this));
         }
 
         return(
@@ -111,7 +117,7 @@ class Search_Youtuber extends Component{
 
                 <div style = {leftContainer2}>
                     <h2>유투버 검색결과</h2>
-
+                            <p></p>
                 
                 <ul>
 
