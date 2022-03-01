@@ -28,6 +28,7 @@ function App() {
  
   return (
     <div className="App">
+      {testStr}
     <Search_Youtuber onSubmit = {function(_title){
               console.log(_title);
           }.bind(this)}></Search_Youtuber>
