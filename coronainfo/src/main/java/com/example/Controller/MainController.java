@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.Entity.Youtuber;
+import com.example.Service.JDBC_YoutuberToTag;
 import com.example.Service.Youtuber_db;
 
 
@@ -24,10 +25,12 @@ import com.example.Service.Youtuber_db;
 public class MainController {
 
 	private Youtuber_db youtuber_db;
+	private JDBC_YoutuberToTag jdbc_youtubertotag;
 	String search;
 	@Autowired
-	public MainController(Youtuber_db youtuber_db) {
+	public MainController(Youtuber_db youtuber_db, JDBC_YoutuberToTag jdbc_YoutuberToTag) {
 		this.youtuber_db = youtuber_db;
+		this.jdbc_youtubertotag = jdbc_YoutuberToTag;
 	}
 
 	/*
@@ -38,7 +41,7 @@ public class MainController {
 	 * 
 	 * 
 	 * if(youtuber.isEmpty()) { model.addAttribute("youtuber_id", "nothing"); //
-	 * data�� ���� �� nothing ������� } else { model.addAttribute("youtuber_id",
+	 * data } else { model.addAttribute("youtuber_id",
 	 * youtuber.get(0).id); model.addAttribute("youtuber_image",
 	 * youtuber.get(0).image);
 	 * model.addAttribute("youtuber_kor_name",youtuber.get(0).kor_name);
@@ -68,11 +71,11 @@ public class MainController {
 	         String id = youtuber.get(i).id;
 	         if(jsonall.containsKey(id)) {
 
-	            JSONObject exist_json = jsonall.get(id); //���� �����ϴ� object �ޱ�
+	            JSONObject exist_json = jsonall.get(id); 
 
 
-				JSONArray exist_jsonarr = (JSONArray) exist_json.get("tag"); //object�ȿ� �ִ� array�ޱ�
-				exist_jsonarr.add(youtuber.get(i).tag); //array�� ���ο� �±� �� �߰�
+				JSONArray exist_jsonarr = (JSONArray) exist_json.get("tag"); 
+				exist_jsonarr.add(youtuber.get(i).tag); 
 			}
 			else {
 				JSONObject json = new JSONObject();
@@ -90,4 +93,11 @@ public class MainController {
 				
 		return jsonall;
 	}
+	
+	@RequestMapping(value="/choose_youtuber", method=RequestMethod.POST)
+	public Map<String,Object> choose_youtuber(@RequestBody Map<String,Object> map) throws ClassNotFoundException, SQLException {
+		search = (String) map.get("name");
+		jdbc_youtubertotag.youtuberToTag(search);
+		return map;
+	}  
 }

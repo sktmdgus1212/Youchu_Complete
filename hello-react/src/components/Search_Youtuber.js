@@ -3,7 +3,16 @@ import axios from 'axios'; // 액시오스
 import Leftbottom from './minicomponents/Leftbottom';
 import Lefttop from './minicomponents/Lefttop';
 
+class youtuber_info{
+    constructor(){
+        this.id = "이름";
+        this.image = "이미지";
+        this.tag = [];
+        this.kor_name = "한글이름"
+    }
+}
 class Search_Youtuber extends Component{
+
     constructor(props){
         super(props);
         this.state={
@@ -12,11 +21,10 @@ class Search_Youtuber extends Component{
             x:null,
 
             finallist:{
-                
-                image:null,
                 id:null,
-                kor_name:null,
-                tag:[]
+                image:null,
+                tag:[],
+                kor_name:null
             }
         }
         this.ChangeMethod=this.ChangeMethod.bind(this);
@@ -32,7 +40,7 @@ class Search_Youtuber extends Component{
 
 
     render(){
-
+        var info = new youtuber_info();
         const leftSidebar= {
             width: '525px',   /* 사이드바의 너비 */
             height:'900px',  /* 사이드바의 높이 */
@@ -56,6 +64,7 @@ class Search_Youtuber extends Component{
             
           }
          
+
 
           function transmit_youtuber_data(){ 
             var searchingFile = document.getElementById("search_data").value; 
@@ -88,8 +97,42 @@ class Search_Youtuber extends Component{
                 return response.data;
               })
               .then(function(data){
-                console.log(data);
+               
+                //console.log(data);
+
+                let keys = Object.keys(data).length;
+                //console.log(keys);
+                let values = Object.values(data);
+               // console.log(values[0].id);
+
+                for(let i=0;i<keys;i++){
+                    info.id = values[i].id;
+                    info.image = values[i].image;
+                    info.kor_name = values[i].kor_name;
+                    for (let j=0;j<values[i].tag.length;j++){
+                        info.tag = values[i].tag[j];
+                    }
+                    console.log(info.id);
+                }
               }.bind(this));
+        }
+
+        function choose_youtuber_data(){ 
+            var searchingFile = document.getElementById("choose_data").value; 
+            axios(
+                {
+                  headers: {"Content-Type": "application/json"},
+                  url: '/choose_youtuber',
+                  method: 'post',
+                  data: {
+                    name: searchingFile
+                  }, 
+                  baseURL: 'http://localhost:8080'
+                  //withCredentials: true
+                }
+              ).then(function (response) {
+                console.log(response.data)
+              });
         }
 
         return(
@@ -122,8 +165,8 @@ class Search_Youtuber extends Component{
                 <ul>
 
                    <li> <Lefttop 
-                        title= "감스트" 
-                        tag = "피파, 롤, 개그" 
+                        title= {info.id}
+                        tag = {info.tag[0]}
                         onChangePage = {this.ChangeMethod}>    
                     </Lefttop></li>
                     
