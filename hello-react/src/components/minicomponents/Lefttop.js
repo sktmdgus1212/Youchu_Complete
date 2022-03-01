@@ -1,6 +1,7 @@
 import React, {Component} from'react';
 
 
+
 class Lefttop extends Component{
     render(){
         const st = {
@@ -25,16 +26,18 @@ class Lefttop extends Component{
         }
         
         return(
+          
+           <div>
             
-           <div style={st}>
-               <div style={Site}><p>(사진넣기)</p></div>
-                <div style={Site}><p><a href = ""  onClick = { function(e){
-                    
-                    e.preventDefault();
-                    this.props.onChangePage(this.props.title)
-                }.bind(this)}>{this.props.title}</a></p></div>
-               
-               <div style={ExtendedSite}><p>{this.props.tag}</p></div>
+            
+               <a href='' onClick={function(e){
+               e.preventDefault();
+
+               this.props.onClick(this.props.id);
+
+            }.bind(this)}> {this.props.id}&nbsp;&nbsp; </a>
+            
+
 
            </div>
 
