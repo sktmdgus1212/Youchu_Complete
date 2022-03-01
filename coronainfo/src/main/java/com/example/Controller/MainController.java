@@ -3,7 +3,6 @@ package com.example.Controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 import org.json.simple.JSONArray;
@@ -59,36 +58,38 @@ public class MainController {
 	}  
 	
 	@ResponseBody
-	@RequestMapping(value="/searched_result_youtuber", method=RequestMethod.POST)
-	public HashMap<String, JSONObject> searched_result_youtuber() throws ClassNotFoundException, SQLException {
-		
-		ArrayList<Youtuber> youtuber = youtuber_db.getList(search);
-		HashMap<String, JSONObject> jsonall = new HashMap<>();
-		
-		for(int i = 0 ; i < youtuber.size() ; i++) {
-			String id = youtuber.get(i).id;
-			if(jsonall.containsKey(id)) {
+	   @RequestMapping(value="/searched_result_youtuber", method=RequestMethod.POST)
+	   public HashMap<String, JSONObject> searched_result_youtuber() throws ClassNotFoundException, SQLException {
+	      
+	      ArrayList<Youtuber> youtuber = youtuber_db.getList(search);
+	      HashMap<String, JSONObject> jsonall = new HashMap<>();
+	      
+	      for(int i = 0 ; i < youtuber.size() ; i++) {
+	         String id = youtuber.get(i).id;
+	         if(jsonall.containsKey(id)) {
 
-				JSONObject exist_json = jsonall.get(id); //현재 존재하는 object 받기
+	            JSONObject exist_json = jsonall.get(id); //현재 존재하는 object 받기
 
-				JSONArray exist_jsonarr = (JSONArray) exist_json.get("tag"); //object안에 있는 array받기
-				exist_jsonarr.add(youtuber.get(i).tag); //array에 새로운 태그 값 추가
-				System.out.print(exist_jsonarr);
-			}
-			else {
-				JSONObject json = new JSONObject();
-				JSONArray jsonarray = new JSONArray();
-				
-				json.put("id", id);
-				json.put("image", youtuber.get(i).image);
-				jsonarray.add(youtuber.get(i).tag);
-				json.put("tag", jsonarray);
-				json.put("kor_name", youtuber.get(i).kor_name);
-				
-				jsonall.put(id, json);				
-			}
-		}
-				
-		return jsonall;
-	}
+	            JSONArray exist_jsonarr = (JSONArray) exist_json.get("tag"); //object안에 있는 array받기
+	            exist_jsonarr.add(youtuber.get(i).tag); //array에 새로운 태그 값 추가
+	            System.out.print(exist_jsonarr);
+	         }
+	         else {
+	         
+	        	 
+	        	JSONObject json = new JSONObject();
+	            JSONArray jsonarray = new JSONArray();
+	            
+	            json.put("id", id);
+	            json.put("image", youtuber.get(i).image);
+	            jsonarray.add(youtuber.get(i).tag);
+	            json.put("tag", jsonarray);
+	            json.put("kor_name", youtuber.get(i).kor_name);
+	            
+	            jsonall.put(id, json);            
+	         }
+	      }
+	            
+	      return jsonall;
+	   }
 }
