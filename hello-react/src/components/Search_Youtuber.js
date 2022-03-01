@@ -56,36 +56,28 @@ class Search_Youtuber extends Component{
             
           }
          
-          async function transmit_youtuber_data(){
+
+          function transmit_youtuber_data(){ 
             var searchingFile = document.getElementById("search_data").value; 
-            
-                  try {
-                  //응답 성공 
-                  const response = await axios.post( 'search_youtuber' , {
-                        //보내고자 하는 데이터 
-                        name: searchingFile
-                  } );
-                  
-                  console.log(response);
-                } catch (error) {
-                  //응답 실패
-                  console.error(error);
-                }
-              
-            /*axios(
+            axios(
                 {
+                  headers: {"Content-Type": "application/json"},
                   url: '/search_youtuber',
                   method: 'post',
                   data: {
                     name: searchingFile
-                  } , 
+                  }, 
                   baseURL: 'http://localhost:8080'
-                  //withCredentials: true,
+                  //withCredentials: true
                 }
               ).then(function (response) {
-                
-              });*/
-        }    
+                console.log(response.data)
+              });
+    
+        }
+              
+           
+           
         async function getData() {
             try {
               //응답 성공
@@ -100,6 +92,7 @@ class Search_Youtuber extends Component{
           }
 
             
+
 
 
 
