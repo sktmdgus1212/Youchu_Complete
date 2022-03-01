@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 @EntityScan
 public class Youtuber {
 	public String id;
-	public byte[] image;
+	public String image;
 	public String tag;
 	public String kor_name;
 	
@@ -13,7 +13,7 @@ public class Youtuber {
 		
 	}
 	
-	public Youtuber(String id, byte[] image, String tag, String kor_name) {
+	public Youtuber(String id, String image, String tag, String kor_name) {
 		this.id = id;
 		this.image = image;
 		this.tag = tag;
@@ -29,11 +29,11 @@ public class Youtuber {
 		this.id = id;
 	}
 
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 
