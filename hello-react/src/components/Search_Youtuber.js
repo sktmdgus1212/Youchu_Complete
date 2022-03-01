@@ -59,8 +59,7 @@ class Search_Youtuber extends Component{
           async function transmit_youtuber_data(){
             var searchingFile = document.getElementById("search_data").value; 
             
-            
-                try {
+                  try {
                   //응답 성공 
                   const response = await axios.post( 'search_youtuber' , {
                         //보내고자 하는 데이터 
@@ -91,7 +90,7 @@ class Search_Youtuber extends Component{
             try {
               //응답 성공
               const response = await axios.get('searched_result_youtuber');
-        
+                
               this.state.x = response;
               console.log(response);
             } catch (error) {
