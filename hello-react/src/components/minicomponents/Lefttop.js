@@ -28,7 +28,7 @@ class Lefttop extends Component{
             
            <div style={st}>
                <div style={Site}><p>(사진넣기)</p></div>
-                <div style={Site}><p><a href = "/"  onClick = { function(e){
+                <div style={Site}><p><a href = ""  onClick = { function(e){
                     
                     e.preventDefault();
                     this.props.onChangePage(this.props.title)

@@ -7,15 +7,25 @@ class Search_Youtuber extends Component{
     constructor(props){
         super(props);
         this.state={
-            lists: ["현재 선택한 유투버들은 "]
+            lists: [],
+            addedlist:[]
         }
+        this.ChangeMethod=this.ChangeMethod.bind(this);
+       
+    }
+
+    ChangeMethod(name){
+        this.state.addedlist=this.state.lists.concat(name+ " ");
+        this.setState({
+            lists:this.state.addedlist
+         })
     }
     
     render(){
 
-        var count=1;
-        var _list=[];
-        
+      
+
+
         const leftSidebar= {
             width: '525px',   /* 사이드바의 너비 */
             height:'900px',  /* 사이드바의 높이 */
@@ -85,51 +95,32 @@ class Search_Youtuber extends Component{
                         <p> <input type = "submit" value = "검색"></input></p>
                     </form>
                 </div>
+
                 <div style = {leftContainer2}>
                     <h2>유투버 검색결과</h2>
 
                     <Lefttop 
                         title= "감스트" 
                         tag = "피파, 롤, 개그" 
-                        onChangePage = { function(name){
-                            _list=this.state.lists.concat(name+",  ")
-                            this.setState({
-                                lists:_list
-                             })
-                    }.bind(this)}>    
+                        onChangePage = {this.ChangeMethod}>    
                     </Lefttop>
                     
                     <Lefttop 
                         title= "정형구tv" 
                         tag = "이산수학, 프로그래밍언어론" 
-                        onChangePage = { function(name){
-                            _list=this.state.lists.concat(name+",  ")
-                            this.setState({
-                                lists:_list
-                             })
-                    }.bind(this)}>    
+                        onChangePage = {this.ChangeMethod}> 
                     </Lefttop>
 
                     <Lefttop 
                         title= "김진석tv" 
                         tag = "컴퓨터알고리즘, 인터넷프로그래밍" 
-                        onChangePage = { function(name){
-                            _list=this.state.lists.concat(name+",  ")
-                            this.setState({
-                                lists:_list
-                             })
-                    }.bind(this)}>    
+                        onChangePage = {this.ChangeMethod}> 
                     </Lefttop>
 
                     <Lefttop 
                         title= "이병정tv" 
                         tag = "소프트웨어공학, 객체지향프로그래밍" 
-                        onChangePage = { function(name){
-                            _list=this.state.lists.concat(name+"  입니다.")
-                            this.setState({
-                                lists:_list
-                             })
-                    }.bind(this)}>    
+                        onChangePage = {this.ChangeMethod}> 
                     </Lefttop>
                     
                     
@@ -139,9 +130,6 @@ class Search_Youtuber extends Component{
 				<div style = {leftContainer2}>
                     <h2>내가 선택한 유투버 목록</h2>
                     {this.state.lists}
-                    
-                    
-                    
                 </div>	
             
             </aside>
