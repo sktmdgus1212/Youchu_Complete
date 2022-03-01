@@ -4,8 +4,6 @@ import Leftbottom from './minicomponents/Leftbottom';
 import Lefttop from './minicomponents/Lefttop';
 
 class Search_Youtuber extends Component{
-   
-   
     constructor(props){
         super(props);
         this.state={
@@ -28,10 +26,9 @@ class Search_Youtuber extends Component{
             lists:this.state.addedlist
          })
     }
-    
+
+
     render(){
-
-
 
         const leftSidebar= {
             width: '525px',   /* 사이드바의 너비 */
@@ -73,28 +70,21 @@ class Search_Youtuber extends Component{
               ).then(function (response) {
                 console.log(response.data)
               });
-    
         }
-              
-           
-           
-        async function getData() {
-            try {
-              //응답 성공
-              const response = await axios.get('searched_result_youtuber');
-                
-              this.state.x = response;
-              console.log(response);
-            } catch (error) {
-              //응답 실패
-              console.error(error);
-            }
-          }
 
-            
-
-
-
+        function getData(){ 
+            axios(
+                {
+                  headers: {"Content-Type": "application/json"},
+                  url: '/searched_result_youtuber',
+                  method: 'post',
+                  baseURL: 'http://localhost:8080'
+                  //withCredentials: true
+                }
+              ).then(function (response) {
+                console.log(response.data.id)
+              });
+        }
 
         return(
             <aside style = {leftSidebar}>
@@ -106,6 +96,7 @@ class Search_Youtuber extends Component{
                                     e.target.title.value
                                 );
                                 transmit_youtuber_data();
+                                getData();
                             }.bind(this)} >
                         <p><input type ="text" 
                             name="title"
@@ -121,7 +112,6 @@ class Search_Youtuber extends Component{
                 <div style = {leftContainer2}>
                     <h2>유투버 검색결과</h2>
 
-                    <textarea>{this.state.x}</textarea>
                 
                 <ul>
 

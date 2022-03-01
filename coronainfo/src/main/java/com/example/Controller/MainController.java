@@ -2,19 +2,22 @@ package com.example.Controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.Entity.Youtuber;
 import com.example.Service.Youtuber_db;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
 
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -55,29 +58,37 @@ public class MainController {
 		return map;
 	}  
 	
+	@ResponseBody
 	@RequestMapping(value="/searched_result_youtuber", method=RequestMethod.POST)
-	public ArrayList<JSONObject> searched_result_youtuber() throws ClassNotFoundException, SQLException {
+	public HashMap<String, JSONObject> searched_result_youtuber() throws ClassNotFoundException, SQLException {
+		
 		ArrayList<Youtuber> youtuber = youtuber_db.getList(search);
-		JSONObject jsonall = new JSONObject();
+		HashMap<String, JSONObject> jsonall = new HashMap<>();
 		
 		for(int i = 0 ; i < youtuber.size() ; i++) {
-			JSONObject json = new JSONObject();
-			
-			json.put("id", youtuber.get(i).id);
-			json.put("image", youtuber.get(i).image);
-			json.put("tag", youtuber.get(i).tag);
-			json.put("kor_name", youtuber.get(i).kor_name);
-			
-			jsonall.put("youtuber_"+(i+1), json);
+			String id = youtuber.get(i).id;
+			if(jsonall.containsKey(id)) {
+
+				JSONObject exist_json = jsonall.get(id); //현재 존재하는 object 받기
+
+				JSONArray exist_jsonarr = (JSONArray) exist_json.get("tag"); //object안에 있는 array받기
+				exist_jsonarr.add(youtuber.get(i).tag); //array에 새로운 태그 값 추가
+				System.out.print(exist_jsonarr);
+			}
+			else {
+				JSONObject json = new JSONObject();
+				JSONArray jsonarray = new JSONArray();
+				
+				json.put("id", id);
+				json.put("image", youtuber.get(i).image);
+				jsonarray.add(youtuber.get(i).tag);
+				json.put("tag", jsonarray);
+				json.put("kor_name", youtuber.get(i).kor_name);
+				
+				jsonall.put(id, json);				
+			}
 		}
-		
-		ArrayList<JSONObject> arrayJson = new ArrayList<JSONObject>();
-		
-		for (int k = 0; k < jsonall.size(); k++) {
-	        JSONObject jsonToArr = (JSONObject) jsonall.get("youtuber_"+(k+1));
-	        arrayJson.add(jsonToArr);
-	    }
-		System.out.print(jsonall+"출력합니다");
-		return arrayJson;
+				
+		return jsonall;
 	}
 }
