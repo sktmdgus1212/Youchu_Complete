@@ -1,6 +1,7 @@
 package com.example.Service;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,8 +17,8 @@ public class JDBC_YoutuberService implements Youtuber_db {
 
 	 private JDBC_FindingTag jdbc_FindingTag;
 	 private String url = "jdbc:oracle:thin:@localhost:1521/xepdb1"; 
-	 private String uid = "CORONA"; 
-	 private String pwd = "Lsm5471789@"; 
+	 private String uid = "USER1"; 
+	 private String pwd = "1234"; 
 	 private String driver = "oracle.jdbc.driver.OracleDriver";
 	 
 	public JDBC_YoutuberService(JDBC_FindingTag jdbc_FindingTag) {

@@ -1,6 +1,7 @@
 package com.example.Controller;
 
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.Entity.Youtuber;
+import com.example.Service.JDBC_YoutuberToTag;
 import com.example.Service.Youtuber_db;
 
 
@@ -24,21 +26,23 @@ import com.example.Service.Youtuber_db;
 public class MainController {
 
 	private Youtuber_db youtuber_db;
+	private JDBC_YoutuberToTag jdbc_youtubertotag;
 	String search;
 	@Autowired
-	public MainController(Youtuber_db youtuber_db) {
+	public MainController(Youtuber_db youtuber_db, JDBC_YoutuberToTag jdbc_YoutuberToTag) {
 		this.youtuber_db = youtuber_db;
+		this.jdbc_youtubertotag = jdbc_YoutuberToTag;
 	}
 
 	/*
 	 * @RequestMapping("/home") public String
 	 * home(@RequestParam(name="searching_youtuber", defaultValue = "gamst") String
 	 * search, Model model) throws ClassNotFoundException, SQLException {
-	 * ArrayList<Youtuber> youtuber = youtuber_db.getList(search); // data °¡Á®¿À±â
+	 * ArrayList<Youtuber> youtuber = youtuber_db.getList(search); // data ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * 
 	 * if(youtuber.isEmpty()) { model.addAttribute("youtuber_id", "nothing"); //
-	 * data°¡ ¾øÀ» ¶§ nothing Áý¾î³ÖÀ½ } else { model.addAttribute("youtuber_id",
+	 * data } else { model.addAttribute("youtuber_id",
 	 * youtuber.get(0).id); model.addAttribute("youtuber_image",
 	 * youtuber.get(0).image);
 	 * model.addAttribute("youtuber_kor_name",youtuber.get(0).kor_name);
@@ -68,28 +72,33 @@ public class MainController {
 	         String id = youtuber.get(i).id;
 	         if(jsonall.containsKey(id)) {
 
-	            JSONObject exist_json = jsonall.get(id); //ÇöÀç Á¸ÀçÇÏ´Â object ¹Þ±â
+	            JSONObject exist_json = jsonall.get(id); 
 
-	            JSONArray exist_jsonarr = (JSONArray) exist_json.get("tag"); //object¾È¿¡ ÀÖ´Â array¹Þ±â
-	            exist_jsonarr.add(youtuber.get(i).tag); //array¿¡ »õ·Î¿î ÅÂ±× °ª Ãß°¡
-	            System.out.print(exist_jsonarr);
-	         }
-	         else {
-	         
-	        	 
-	        	JSONObject json = new JSONObject();
-	            JSONArray jsonarray = new JSONArray();
-	            
-	            json.put("id", id);
-	            json.put("image", youtuber.get(i).image);
-	            jsonarray.add(youtuber.get(i).tag);
-	            json.put("tag", jsonarray);
-	            json.put("kor_name", youtuber.get(i).kor_name);
-	            
-	            jsonall.put(id, json);            
-	         }
-	      }
-	            
-	      return jsonall;
-	   }
+
+				JSONArray exist_jsonarr = (JSONArray) exist_json.get("tag"); 
+				exist_jsonarr.add(youtuber.get(i).tag); 
+			}
+			else {
+				JSONObject json = new JSONObject();
+				JSONArray jsonarray = new JSONArray();
+				
+				json.put("id", id);
+				json.put("image", youtuber.get(i).image);
+				jsonarray.add(youtuber.get(i).tag);
+				json.put("tag", jsonarray);
+				json.put("kor_name", youtuber.get(i).kor_name);
+				
+				jsonall.put(id, json);				
+			}
+		}
+				
+		return jsonall;
+	}
+	
+	@RequestMapping(value="/choose_youtuber", method=RequestMethod.POST)
+	public Map<String,Object> choose_youtuber(@RequestBody Map<String,Object> map) throws ClassNotFoundException, SQLException {
+		search = (String) map.get("name");
+		jdbc_youtubertotag.youtuberToTag(search);
+		return map;
+	}  
 }
