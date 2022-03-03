@@ -24,15 +24,15 @@ class Lefttop extends Component{
             float:'right'
         }
         
+    
         return(
-            
            <div style={st}>
-               <div style={Site}><p>(사진넣기)</p></div>
+               <img style={Site} src={this.props.image}></img>
                 <div style={Site}><p><a href = ""  onClick = { function(e){
                     
                     e.preventDefault();
-                    this.props.onChangePage(this.props.title)
-                }.bind(this)}>{this.props.title}</a></p></div>
+                    this.props.onChangePage(this.props.id)
+                }.bind(this)}>{this.props.id}</a></p></div>
                
                <div style={ExtendedSite}><p>{this.props.tag}</p></div>
 

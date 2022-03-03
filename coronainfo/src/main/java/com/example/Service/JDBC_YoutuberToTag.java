@@ -5,17 +5,23 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
+
+@Service
 public class JDBC_YoutuberToTag {
-
+	 private JDBC_InsertTag jdbc_insertTag;
 	 private String url = "jdbc:oracle:thin:@localhost:1521/xepdb1"; 
 	 private String uid = "USER1"; 
 	 private String pwd = "1234"; 
 	 private String driver = "oracle.jdbc.driver.OracleDriver";
 	 
-	 public ArrayList<Integer> youtuberToTag(String choose_youtuber) throws SQLException{
-		ArrayList<Integer> tagnum_list = new ArrayList<>();
+	 public JDBC_YoutuberToTag(JDBC_InsertTag jdbc_insertTag) {
+		 this.jdbc_insertTag = jdbc_insertTag;
+	 }
+	 public void youtuberToTag(String choose_youtuber) throws SQLException{
+		int tagnum;
 		String sql = "SELECT TAG FROM YOUTUBER WHERE ID='"+choose_youtuber+"'";
 
 		Connection con = DriverManager.getConnection(url, uid, pwd);
@@ -23,9 +29,14 @@ public class JDBC_YoutuberToTag {
 		ResultSet rs = st.executeQuery(sql);
 		
 		while(rs.next()) {
-			tagnum_list.add(rs.getInt("TAG"));
+			tagnum = rs.getInt("TAG");
+			jdbc_insertTag.insertTag(tagnum);
 		}
 		
-		return tagnum_list;
+		rs.close();
+		st.close();
+		con.close();
+		
+		return;
 	 }
 }

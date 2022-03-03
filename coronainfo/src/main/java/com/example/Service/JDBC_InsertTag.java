@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class JDBC_InsertTag {
 	 private String url = "jdbc:oracle:thin:@localhost:1521/xepdb1"; 
 	 private String uid = "USER1"; 
