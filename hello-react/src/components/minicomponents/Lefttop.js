@@ -4,6 +4,7 @@ import React, {Component} from'react';
 
 class Lefttop extends Component{
     render(){
+        
         const st = {
             width:'525px',
             height:'100px',
@@ -25,10 +26,10 @@ class Lefttop extends Component{
             float:'right'
         }
         
+    
         return(
           
            <div>
-            
             
                <a href='' onClick={function(e){
                e.preventDefault();
@@ -38,11 +39,24 @@ class Lefttop extends Component{
             }.bind(this)}> {this.props.id}&nbsp;&nbsp; </a>
             
 
+           <div style={st}>
+               <img style={Site} src={this.props.image}></img>
+               
+                <div style={Site}><p><a href = ""  onClick = { function(e){
+                    
+                    e.preventDefault();
+                    this.props.onChangePage(this.props.id)
+                }.bind(this)}>{this.props.id}</a></p></div>
+               
+               <div style={ExtendedSite}><p>{this.props.tag}</p></div>
 
-           </div>
+            </div>
+
+            </div>
+            
 
         );
     }
 }
 
-export default Lefttop
+export default Lefttop;

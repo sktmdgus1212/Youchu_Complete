@@ -56,7 +56,7 @@ class Search_Youtuber extends Component{
         var idList = [];
         var tagList=[];
         var _article = null;
-        
+        var baseUrl = "/img/";
 
         axios(
             {
@@ -82,7 +82,7 @@ class Search_Youtuber extends Component{
           
             for(let i=0;i<keys;i++){
                 var newObject = new Object();
-                    newObject.image=values[i].image;
+                    newObject.image=baseUrl+values[i].image;
                     newObject.kor_name=values[i].kor_name;
                     newObject.id=values[i].id;
                     newObject.tag=[];
@@ -90,20 +90,37 @@ class Search_Youtuber extends Component{
                    newObject.tag[j]=values[i].tag[j];
                    tagList.push(newObject.tag[j]);
                 }
+                console.log(newObject.id);    
             }
-                console.log(tagList);
-
+            
                 this.setState({
                     image:newObject.image,
                     kor_name:newObject.name,
                     id:newObject.id,
                     tag:tagList
                 })
-            
+                
           }.bind(this));    
           
     }
 
+    choose_youtuber_data(){ 
+      var searchingFile = document.getElementById("choose_data").value; 
+      axios(
+          {
+            headers: {"Content-Type": "application/json"},
+            url: '/choose_youtuber',
+            method: 'post',
+            data: {
+              name: searchingFile
+            }, 
+            baseURL: 'http://localhost:8080'
+            //withCredentials: true
+          }
+        ).then(function (response) {
+          console.log(response.data)
+        });
+  }
     render(){
        var _article = null;
        
@@ -163,14 +180,6 @@ class Search_Youtuber extends Component{
                 <div style = {leftContainer2}>
                     <h2>유투버 검색결과</h2>
                            {_article}
-                
-                          
-                          
-                
-              
-                    
-                    
-                    
                 </div>
 
 				<div style = {leftContainer2}>
@@ -178,11 +187,8 @@ class Search_Youtuber extends Component{
                     {this.state.lists}
                 </div>	
             
-            </aside>
-            
-        );
-    
+            </aside>        
+        ); 
+  }
 }
-}
-
 export default Search_Youtuber;
