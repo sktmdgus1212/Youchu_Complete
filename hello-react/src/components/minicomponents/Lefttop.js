@@ -28,31 +28,20 @@ class Lefttop extends Component{
         
     
         return(
-          
-           <div>
-            
-               <a href='' onClick={function(e){
-               e.preventDefault();
-
-               this.props.onClick(this.props.id);
-
-            }.bind(this)}> {this.props.id}&nbsp;&nbsp; </a>
-            
-
+              
            <div style={st}>
                <img style={Site} src={this.props.image}></img>
                
                 <div style={Site}><p><a href = ""  onClick = { function(e){
-                    
                     e.preventDefault();
                     this.props.onClick(this.props.id)
-                }.bind(this)}>{this.props.id}</a></p></div>
+                    }.bind(this)}>{this.props.id}</a></p></div>
                
                <div style={ExtendedSite}><p>{this.props.tag}</p></div>
 
             </div>
 
-            </div>
+         
             
 
         );
