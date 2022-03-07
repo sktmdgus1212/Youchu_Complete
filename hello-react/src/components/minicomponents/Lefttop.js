@@ -45,7 +45,7 @@ class Lefttop extends Component{
                 <div style={Site}><p><a href = ""  onClick = { function(e){
                     
                     e.preventDefault();
-                    this.props.onChangePage(this.props.id)
+                    this.props.onClick(this.props.id)
                 }.bind(this)}>{this.props.id}</a></p></div>
                
                <div style={ExtendedSite}><p>{this.props.tag}</p></div>
