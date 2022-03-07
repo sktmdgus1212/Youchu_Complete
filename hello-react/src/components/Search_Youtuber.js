@@ -10,7 +10,7 @@ class Search_Youtuber extends Component{
             lists: [],
             addedlist:[],
             x:null,
-            index:0,
+            finalIndex:0,
 
           finallist:[
             {image:'', kor_name: '', id:'', tag:[] },
@@ -85,9 +85,9 @@ class Search_Youtuber extends Component{
             let keys = Object.keys(data).length;
            
             let values = Object.values(data);
-           
-          
-            for(let i=0, index=0;i<keys;i++, index++){
+            let index=0;
+
+            for(let i=0;i<keys;i++, index++){
               
                 var newObject = new Object();
 
@@ -118,24 +118,21 @@ class Search_Youtuber extends Component{
             }
             
                 this.setState({
-                    finallist: this.state.finallist
+                    finallist: this.state.finallist,
+                    finalIndex: index
+                    
                 })
                 console.log(this.state.finallist);
+                console.log(this.state.finalIndex);
           }.bind(this));    
           
     }
 
     return_youtuber_data(){
-      for(let count=0;count<this.state.index;count++) {
-        return(
-        <Lefttop  
-                  image= {this.state.finallist[count].image} 
-                  kor_name={this.state.finallist[count].kor_name}
-                  id={this.state.finallist[count].id} 
-                  tag={this.state.finallist[count].tag} 
-                  
-                  > </Lefttop>);
-      }
+      
+        return(this.state.finalIndex);
+      
+      
     }
 
     choose_youtuber_data(){ 
@@ -212,7 +209,7 @@ class Search_Youtuber extends Component{
 
                 <div style = {leftContainer2}>
                     <h2>유투버 검색결과</h2>
-
+                              ㅇㅇ
                     {this.return_youtuber_data()}
       
                  
