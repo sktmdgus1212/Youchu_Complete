@@ -83,7 +83,7 @@ class Search_Youtuber extends Component{
           .then(function(data){
 
             let keys = Object.keys(data).length;
-           
+            console.log("키의 숫자는: " + keys);
             let values = Object.values(data);
             let index=0;
 
@@ -130,8 +130,11 @@ class Search_Youtuber extends Component{
 
     return_youtuber_data(){
       
-        return(this.state.finalIndex);
-      
+        return(
+          <div>
+            {this.state.finallist[0].id}
+
+          </div>);
       
     }
 
