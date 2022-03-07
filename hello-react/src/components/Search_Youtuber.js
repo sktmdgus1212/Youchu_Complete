@@ -129,13 +129,50 @@ class Search_Youtuber extends Component{
     }
 
     return_youtuber_data(){
-      
+      const st = {
+        width:'525px',
+        height:'100px',
+        backgroundColor:"white"
+    }
+    const Site={
+        width: '100px',
+        height:'100px',
+        border:'0.01px',
+        borderStyle:'dashed',
+        float:'left'
+
+    }
+    const ExtendedSite={
+        width: '325px',
+        height:'100px',
+        border:'0.01px',  
+        borderStyle:'dashed',
+        float:'right'
+    }
+    const rendering = () => {
+      const result = [];
+      for (let i = 0; i < this.state.finallist.length; i++) {
+        result.push(<div style={st}>
+          <img style={Site} src={this.state.finallist[i].image}></img>
+          
+           <div style={Site}><p><a href = ""  onClick = { function(e){
+               
+               e.preventDefault();
+               this.props.onClick(this.props.id)
+           }.bind(this)}>{this.state.finallist[i].id}</a></p></div>
+          
+          <div style={ExtendedSite}><p>{this.state.finallist[i].tag}</p></div>
+
+       </div>
+);
+      }
+      return result;
+    };
         return(
           <div>
-            {this.state.finallist[0].id}
-
-          </div>);
-      
+            {rendering()}
+          </div>
+       );
     }
 
     choose_youtuber_data(){ 
