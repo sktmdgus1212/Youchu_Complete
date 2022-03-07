@@ -10,6 +10,15 @@ class Search_Youtuber extends Component{
             lists: [],
             addedlist:[],
             x:null,
+            finalIndex:0,
+
+          finallist:[
+            {image:'', kor_name: '', id:'', tag:[] },
+            {image:'', kor_name: '', id:'', tag:[] },
+            {image:'', kor_name: '', id:'', tag:[] },
+            {image:'', kor_name: '', id:'', tag:[] },
+            {image:'', kor_name: '', id:'', tag:[] },
+          ],
 
             image:'',
             kor_name:'',
@@ -29,7 +38,7 @@ class Search_Youtuber extends Component{
             lists:this.state.addedlist
          })
     }
-
+    
 
     transmit_youtuber_data(){ 
         var searchingFile = document.getElementById("search_data").value; 
@@ -57,6 +66,7 @@ class Search_Youtuber extends Component{
         var tagList=[];
         var _article = null;
         var baseUrl = "/img/";
+        var result = {};
 
         axios(
             {
@@ -67,41 +77,65 @@ class Search_Youtuber extends Component{
               //withCredentials: true
             }
           ).then(function (response) {
-            console.log(response.data);
             return response.data;
             
           })
           .then(function(data){
-            
-            console.log(data);
 
             let keys = Object.keys(data).length;
-            console.log(keys);
+            console.log("키의 숫자는: " + keys);
             let values = Object.values(data);
-            console.log(values);
-          
-            for(let i=0;i<keys;i++){
+            let index=0;
+
+            for(let i=0;i<keys;i++, index++){
+              
                 var newObject = new Object();
+
                     newObject.image=baseUrl+values[i].image;
+                    this.state.finallist[index].image =baseUrl+values[i].image;
+                    console.log(this.state.finallist[index].image);
+
                     newObject.kor_name=values[i].kor_name;
+                    this.state.finallist[index].kor_name =values[i].kor_name;
+                    console.log(this.state.finallist[index].kor_name);
+
                     newObject.id=values[i].id;
+                    this.state.finallist[index].id=(values[i].id);
+                    console.log(this.state.finallist[index].id);
+
                     newObject.tag=[];
+
                 for (let j=0;j<values[i].tag.length;j++){
                    newObject.tag[j]=values[i].tag[j];
+
                    tagList.push(newObject.tag[j]);
-                }
-                console.log(newObject.id);    
+                   this.state.finallist[index].tag = tagList
+
+                   console.log(this.state.finallist[index].tag);
+                } 
+                tagList=[];
+
             }
             
                 this.setState({
-                    image:newObject.image,
-                    kor_name:newObject.name,
-                    id:newObject.id,
-                    tag:tagList
+                    finallist: this.state.finallist,
+                    finalIndex: index
+                    
                 })
-                
+                console.log(this.state.finallist);
+                console.log(this.state.finalIndex);
           }.bind(this));    
           
+    }
+
+    return_youtuber_data(){
+      
+        return(
+          <div>
+            {this.state.finallist[0].id}
+
+          </div>);
+      
     }
 
     choose_youtuber_data(){ 
@@ -122,13 +156,12 @@ class Search_Youtuber extends Component{
         });
   }
     render(){
-       var _article = null;
-       
-       _article = <Lefttop image= {this.state.image} kor_name={this.state.kor_name}  id={this.state.id} tag={this.state.tag} 
-                    onClick={function(_id){
-                        var _list =this.state.lists.concat(_id);
-                        this.setState({lists:_list});
-                    }.bind(this)} > </Lefttop>
+      var _article = null;
+      var num=0;
+      var index = this.state.index;
+
+     
+  
         const leftSidebar= {
             width: '525px',   /* 사이드바의 너비 */
             height:'900px',  /* 사이드바의 높이 */
@@ -179,12 +212,15 @@ class Search_Youtuber extends Component{
 
                 <div style = {leftContainer2}>
                     <h2>유투버 검색결과</h2>
-                           {_article}
+                              ㅇㅇ
+                    {this.return_youtuber_data()}
+      
+                 
                 </div>
 
 				<div style = {leftContainer2}>
                     <h2>내가 선택한 유투버 목록</h2>
-                    {this.state.lists}
+                    
                 </div>	
             
             </aside>        
