@@ -7,20 +7,20 @@ class Lefttop extends Component{
         
         const st = {
             width:'525px',
-            height:'100px',
+            height:'80px',
             backgroundColor:"white"
         }
         const Site={
-            width: '100px',
-            height:'100px',
+            width: '80px',
+            height:'80px',
             border:'0.01px',
             borderStyle:'dashed',
             float:'left'
 
         }
         const ExtendedSite={
-            width: '325px',
-            height:'100px',
+            width: '285px',
+            height:'80px',
             border:'0.01px',
             borderStyle:'dashed',
             float:'right'
@@ -36,6 +36,8 @@ class Lefttop extends Component{
                     e.preventDefault();
                     this.props.onClick(this.props.id)
                     }.bind(this)}>{this.props.id}</a></p></div>
+            <div style={Site}><p>{this.props.kor_name}</p></div>
+                
                
                <div style={ExtendedSite}><p>{this.props.tag}</p></div>
 
