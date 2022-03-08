@@ -179,38 +179,10 @@ class Search_Youtuber extends Component{
             
           }
 
-          const st = {
-            width:'525px',
-            height:'100px',
-            backgroundColor:"white"
-        }
-        const Site={
-            width: '85px',
-            height:'100px',
-            border:'0.01px',
-            borderStyle:'dashed',
-            float:'left'
-
-        }
-        const ExtendedSite={
-            width: '270px',
-            height:'100px',
-            border:'0.01px',
-            borderStyle:'dashed',
-            float:'right'
-        }
         const _lists = this.state.finallist;
           const returnList = Object.values(_lists).map( list => {
             return(
-              <div style={st}  >
-               <img style={Site} src={"baseURL"+list.image}></img>
-               
-                <div style={Site}><p>{list.id}</p></div>
-                <div style={Site}><p>{list.kor_name}</p></div>
-               
-               <div style={ExtendedSite}><p>{list.tag}</p></div>
-
-            </div>
+              <Lefttop image = {list.image} id={list.id} kor_name={list.kor_name} tag={list.tag}></Lefttop> 
             );
           
           })
