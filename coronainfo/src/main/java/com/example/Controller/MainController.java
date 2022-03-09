@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.Entity.Youtuber;
+import com.example.Service.JDBC_IdToTag;
 import com.example.Service.Youtuber_db;
 
 
@@ -24,10 +25,14 @@ import com.example.Service.Youtuber_db;
 public class MainController {
 
 	private Youtuber_db youtuber_db;
+	private JDBC_IdToTag idToTag;
+	ArrayList<Integer> tag_list;
 	String search;
+	String choosed_youtuber_name;
 	@Autowired
-	public MainController(Youtuber_db youtuber_db) {
+	public MainController(Youtuber_db youtuber_db, JDBC_IdToTag idToTag) {
 		this.youtuber_db = youtuber_db;
+		this.idToTag = idToTag;
 	}
 
 	/*
@@ -54,6 +59,14 @@ public class MainController {
 	@RequestMapping(value="/search_youtuber", method=RequestMethod.POST)
 	public Map<String,Object> search_youtuber(@RequestBody Map<String,Object> map) throws ClassNotFoundException, SQLException {
 		search = (String) map.get("name");
+		return map;
+	}  
+	
+	@RequestMapping(value="/choose_youtuber", method=RequestMethod.POST)
+	public Map<String,Object> choose_youtuber(@RequestBody Map<String,Object> map) throws ClassNotFoundException, SQLException {
+		choosed_youtuber_name = (String) map.get("name");
+		tag_list = idToTag.fun_idtotag(choosed_youtuber_name);
+		//System.out.print(choosed_youtuber_name);
 		return map;
 	}  
 	
@@ -92,4 +105,5 @@ public class MainController {
 	            
 	      return jsonall;
 	   }
+	
 }

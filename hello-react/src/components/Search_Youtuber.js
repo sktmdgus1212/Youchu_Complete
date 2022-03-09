@@ -127,34 +127,7 @@ class Search_Youtuber extends Component{
           }.bind(this));    
           
     }
-
-    return_youtuber_data(){
-      
-        return(
-          <div>
-            {this.state.finallist[0].id}
-
-          </div>);
-      
-    }
-
-    choose_youtuber_data(){ 
-      var searchingFile = document.getElementById("choose_data").value; 
-      axios(
-          {
-            headers: {"Content-Type": "application/json"},
-            url: '/choose_youtuber',
-            method: 'post',
-            data: {
-              name: searchingFile
-            }, 
-            baseURL: 'http://localhost:8080'
-            //withCredentials: true
-          }
-        ).then(function (response) {
-          console.log(response.data)
-        });
-  }
+  
     render(){
       var _article = null;
       var num=0;
@@ -185,6 +158,14 @@ class Search_Youtuber extends Component{
             
           }
 
+        const _lists = this.state.finallist;
+          const returnList = Object.values(_lists).map( list => {
+            return(
+              <Lefttop image = {list.image} id={list.id} kor_name={list.kor_name} tag={list.tag}></Lefttop> 
+            );
+          
+          })
+
         return(
             <aside style = {leftSidebar}>
                 <div style= {leftContainer1}>
@@ -212,8 +193,8 @@ class Search_Youtuber extends Component{
 
                 <div style = {leftContainer2}>
                     <h2>유투버 검색결과</h2>
-                              ㅇㅇ
-                    {this.return_youtuber_data()}
+
+                    {returnList}
       
                  
                 </div>

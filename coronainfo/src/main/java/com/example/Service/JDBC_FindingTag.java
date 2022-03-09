@@ -15,8 +15,8 @@ import com.example.Entity.Youtuber;
 @Service
 public class JDBC_FindingTag {
 	 private String url = "jdbc:oracle:thin:@localhost:1521/xepdb1"; 
-	 private String uid = "CORONA"; 
-	 private String pwd = "Lsm5471789@"; 
+	 private String uid = "USER1"; 
+	 private String pwd = "1234"; 
 	 private String driver = "oracle.jdbc.driver.OracleDriver";
 	 
 	
