@@ -127,71 +127,7 @@ class Search_Youtuber extends Component{
           }.bind(this));    
           
     }
-
-    return_youtuber_data(){
-      const st = {
-        width:'525px',
-        height:'100px',
-        backgroundColor:"white"
-    }
-    const Site={
-        width: '100px',
-        height:'100px',
-        border:'0.01px',
-        borderStyle:'dashed',
-        float:'left'
-
-    }
-    const ExtendedSite={
-        width: '325px',
-        height:'100px',
-        border:'0.01px',  
-        borderStyle:'dashed',
-        float:'right'
-    }
-    const rendering = () => {
-      const result = [];
-      for (let i = 0; i < this.state.finallist.length; i++) {
-        result.push(<div style={st}>
-          <img style={Site} src={this.state.finallist[i].image}></img>
-          
-           <div style={Site}><p><a href = ""  onClick = { function(e){
-               
-               e.preventDefault();
-               this.props.onClick(this.props.id)
-           }.bind(this)}>{this.state.finallist[i].id}</a></p></div>
-          
-          <div style={ExtendedSite}><p>{this.state.finallist[i].tag}</p></div>
-
-       </div>
-);
-      }
-      return result;
-    };
-        return(
-          <div>
-            {rendering()}
-          </div>
-       );
-    }
-
-    choose_youtuber_data(){ 
-      var searchingFile = document.getElementById("choose_data").value; 
-      axios(
-          {
-            headers: {"Content-Type": "application/json"},
-            url: '/choose_youtuber',
-            method: 'post',
-            data: {
-              name: searchingFile
-            }, 
-            baseURL: 'http://localhost:8080'
-            //withCredentials: true
-          }
-        ).then(function (response) {
-          console.log(response.data)
-        });
-  }
+  
     render(){
       var _article = null;
       var num=0;
@@ -222,6 +158,14 @@ class Search_Youtuber extends Component{
             
           }
 
+        const _lists = this.state.finallist;
+          const returnList = Object.values(_lists).map( list => {
+            return(
+              <Lefttop image = {list.image} id={list.id} kor_name={list.kor_name} tag={list.tag}></Lefttop> 
+            );
+          
+          })
+
         return(
             <aside style = {leftSidebar}>
                 <div style= {leftContainer1}>
@@ -249,8 +193,8 @@ class Search_Youtuber extends Component{
 
                 <div style = {leftContainer2}>
                     <h2>유투버 검색결과</h2>
-                              ㅇㅇ
-                    {this.return_youtuber_data()}
+
+                    {returnList}
       
                  
                 </div>
