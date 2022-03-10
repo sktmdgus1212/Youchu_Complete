@@ -5,20 +5,19 @@ class Leftbottom extends Component{
         
         const st = {
             width:'525px',
-            height:'100px',
+            height:'80px',
             backgroundColor:"white"
         }
         const Site={
-            width: '100px',
-            height:'100px',
+            width: '80px',
+            height:'80px',
             border:'0.01px',
             borderStyle:'dashed',
             float:'left'
-
         }
         const ExtendedSite={
-            width: '325px',
-            height:'100px',
+            width: '285px',
+            height:'80px',
             border:'0.01px',
             borderStyle:'dashed',
             float:'right'
@@ -26,16 +25,12 @@ class Leftbottom extends Component{
         
     
         return(
-          
+            
             <div   style = {st}>
-           
-               
-               
-                <div style = {Site}> <p>{this.props.id} </p> </div>
-                <div style={Site}><p>{this.props.kor_name} </p></div>
-                
-               
-                <div style={ExtendedSite}><input style={{borderStyle:'none'}} type="text" name = "tag" value = {this.props.tag} ></input></div>
+                <img  style={Site}  src={this.props.image}></img>
+                <div style = {Site}> <input  id = "choose_data" style={{borderStyle:'none'}} name = "id" type = "text"  value={this.props.id} ></input> </div>
+                <div style={Site}><input style={{borderStyle:'none'}} type="text" name = "kor_name" value = {this.props.kor_name} ></input></div>
+                <div style={ExtendedSite}><input style={{borderStyle:'none'}} size='35' type="text" name = "tag" value = {this.props.tag} ></input></div>
 
             </div>
             
