@@ -220,10 +220,16 @@ class Search_Youtuber extends Component{
                  
                 </div>
 
-				<div style = {leftContainer2}>
-                    <h2>내가 선택한 유투버 목록</h2>
+				<div style = {leftContainer2} >
                     
-                </div>	
+                    
+                    <h2>내가 선택한 유투버 목록</h2>
+                    <div > </div>
+                
+                
+                
+                
+        </div>	
             
             </aside>        
         ); 

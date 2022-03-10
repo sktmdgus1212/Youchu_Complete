@@ -34,12 +34,13 @@ class Lefttop extends Component{
                
                 <div style={Site}><p><a href = ""  onClick = { function(e){
                     e.preventDefault();
-                    this.props.onClick(this.props.id)
+                    console.log(this);
                     }.bind(this)}>{this.props.id}</a></p></div>
-            <div style={Site}><p>{this.props.kor_name}</p></div>
+                    
+                <div style={Site}><p>{this.props.kor_name}</p></div>
                 
                
-               <div style={ExtendedSite}><p>{this.props.tag}</p></div>
+               <div style={ExtendedSite}><p> {this.props.tag + ","}</p></div>
 
             </div>
 
