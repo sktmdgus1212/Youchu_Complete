@@ -27,9 +27,15 @@ class Leftbottom extends Component{
     
         return(
           
-           <div>
-            
+            <div   style = {st}>
+           
                
+               
+                <div style = {Site}> <p>{this.props.id} </p> </div>
+                <div style={Site}><p>{this.props.kor_name} </p></div>
+                
+               
+                <div style={ExtendedSite}><input style={{borderStyle:'none'}} type="text" name = "tag" value = {this.props.tag} ></input></div>
 
             </div>
             

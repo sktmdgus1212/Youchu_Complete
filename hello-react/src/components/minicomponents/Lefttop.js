@@ -3,8 +3,11 @@ import axios from 'axios'; // 액시오스
 
 class Lefttop extends Component{
 
-    choose_youtuber_data(id){
-        //var searchingFile = document.getElementById("choose_data").name; 
+state={ doubleSubmitFlag:false }
+        
+
+
+    choose_youtuber_data(id){ 
         var searchingFile = id;
         axios(
             {
@@ -21,6 +24,24 @@ class Lefttop extends Component{
               console.log(searchingFile)
           });
     }
+
+
+ doubleSubmitCheck(){
+     
+        if(this.state.doubleSubmitFlag){
+            return this.state.doubleSubmitFlag;
+        }else{
+            this.setState({doubleSubmitFlag :true})
+            return false;
+        }
+    }
+ 
+     insert(){
+        if(this.doubleSubmitCheck()) return;
+ 
+        alert("아래에 추가합니다!");
+    }
+
 
     render(){
         const st = {
@@ -45,24 +66,27 @@ class Lefttop extends Component{
         
     
         return(
-              
+    
             <form   style = {st} onSubmit={ function(e){
+                
+                this.insert();
                 e.preventDefault();
-                console.log(e.target);
-                //this.props.onSubmit(e);
+                
+                this.props.onSubmit(e.target.id.value, e.target.kor_name.value,e.target.tag.value);
+                console.log(e.target.hidden.value);
                 this.choose_youtuber_data(e.target.hidden.value);
                 
                 }.bind(this)} >
            
-               <img style={Site} src={this.props.image}></img>
+               <img  style={Site}  src={this.props.image}></img>
                
-                <div style = {Site}><input  id = "choose_data" type = "submit" name="id" value={this.props.id} ></input> </div>
-                <div style={Site}><p>{this.props.kor_name}</p></div>
-                <input type = "hidden" name = "hidden" value = {this.props.id_num}></input>
+                <div style = {Site}> <input  id = "choose_data" name = "id" data-id="4" type = "submit"  value={this.props.id} ></input> </div>
+                <div style={Site}><input style={{borderStyle:'none'}} type="text" name = "kor_name" value = {this.props.kor_name} ></input></div>
+                <input type = "hidden" id = "hidden" value = {this.props.id_num}></input> 
                
-                <div style={ExtendedSite}><p>{this.props.tag}</p></div>
-
-            </form>
+                <div style={ExtendedSite}><input style={{borderStyle:'none'}} type="text" name = "tag" value = {this.props.tag} ></input></div>
+              
+           </form>
         );
     }
 }
