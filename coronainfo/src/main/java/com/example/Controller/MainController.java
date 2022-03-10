@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.Entity.Youtuber;
+import com.example.Service.JDBC_FillMatrix;
 import com.example.Service.JDBC_IdToTag;
+import com.example.Service.JDBC_TagSize;
+import com.example.Service.JDBC_YoutuberSize;
 import com.example.Service.Youtuber_db;
 
 
@@ -26,13 +29,20 @@ public class MainController {
 
 	private Youtuber_db youtuber_db;
 	private JDBC_IdToTag idToTag;
-	ArrayList<Integer> tag_list;
+	private JDBC_TagSize jdbc_TagSize;
+	private JDBC_YoutuberSize jdbc_YoutuberSize;
+	private JDBC_FillMatrix fillMatrix;
+	int[] tag_list;
+	int[][] youtuber_list;
 	String search;
 	String choosed_youtuber_name;
 	@Autowired
-	public MainController(Youtuber_db youtuber_db, JDBC_IdToTag idToTag) {
+	public MainController(Youtuber_db youtuber_db, JDBC_IdToTag idToTag, JDBC_TagSize jdbc_TagSize, JDBC_YoutuberSize jdbc_YoutuberSize, JDBC_FillMatrix fillMatrix) {
 		this.youtuber_db = youtuber_db;
 		this.idToTag = idToTag;
+		this.jdbc_TagSize = jdbc_TagSize;
+		this.jdbc_YoutuberSize = jdbc_YoutuberSize;
+		this.fillMatrix = fillMatrix;
 	}
 
 	/*
@@ -52,7 +62,11 @@ public class MainController {
 
 	@RequestMapping("/home")
 	public String home() throws ClassNotFoundException, SQLException {
-		
+		int col = jdbc_YoutuberSize.find_youtubersize();
+		int row = jdbc_TagSize.find_tagsize();
+		System.out.print(col+" "+row);
+		//youtuber_list = fillMatrix.fill_matrix(col, row);
+		tag_list = new int[row];
 		return "home";
 	}
 	
@@ -65,8 +79,12 @@ public class MainController {
 	@RequestMapping(value="/choose_youtuber", method=RequestMethod.POST)
 	public Map<String,Object> choose_youtuber(@RequestBody Map<String,Object> map) throws ClassNotFoundException, SQLException {
 		choosed_youtuber_name = (String) map.get("name");
-		tag_list = idToTag.fun_idtotag(choosed_youtuber_name);
-		//System.out.print(choosed_youtuber_name);
+		ArrayList<Integer> current_tag_list= idToTag.fun_idtotag(choosed_youtuber_name);
+		
+		for(int i = 0 ; i < current_tag_list.size() ;i++) {
+			tag_list[current_tag_list.get(i)] += 1;
+		}
+		
 		return map;
 	}  
 	
@@ -85,7 +103,7 @@ public class MainController {
 
 	            JSONArray exist_jsonarr = (JSONArray) exist_json.get("tag"); //object안에 있는 array받기
 	            exist_jsonarr.add(youtuber.get(i).tag); //array에 새로운 태그 값 추가
-	            System.out.print(exist_jsonarr);
+	            //System.out.print(exist_jsonarr);
 	         }
 	         else {
 	         
@@ -98,12 +116,14 @@ public class MainController {
 	            jsonarray.add(youtuber.get(i).tag);
 	            json.put("tag", jsonarray);
 	            json.put("kor_name", youtuber.get(i).kor_name);
-	            
+	            json.put("id_num", youtuber.get(i).id_num);
 	            jsonall.put(id, json);            
 	         }
 	      }
 	            
 	      return jsonall;
 	   }
+	
+	
 	
 }

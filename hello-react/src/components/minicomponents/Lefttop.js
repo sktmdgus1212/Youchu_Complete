@@ -3,7 +3,7 @@ import axios from 'axios'; // 액시오스
 
 class Lefttop extends Component{
 
-    choose_youtuber_data(){ 
+    choose_youtuber_data(){
         var searchingFile = document.getElementById("choose_data").value; 
         axios(
             {
@@ -19,6 +19,7 @@ class Lefttop extends Component{
           ).then(function (response) {
           });
     }
+
     render(){
         const st = {
             width:'525px',
@@ -43,24 +44,23 @@ class Lefttop extends Component{
     
         return(
               
-           <div style={st}>
+            <form   style = {st} onSubmit={ function(e){
+                e.preventDefault();
+                console.log(e.target);
+                //this.props.onSubmit(e);
+                this.choose_youtuber_data();
+                
+                }.bind(this)} >
+           
                <img style={Site} src={this.props.image}></img>
                
-                <div style={Site}><p><a href = ""  onClick = { function(e){
-                    e.preventDefault();
-                    this.choose_youtuber_data();
-                    //function에 변수를 어떻게 받음??
-                    }.bind(this)}>{this.props.id}</a></p></div>
-            <div style={Site}><p>{this.props.kor_name}</p></div>
+                <div style = {Site}><input  id = "choose_data" type = "submit" value={this.props.id} ></input> </div>
+                <div style={Site}><p>{this.props.kor_name}</p></div>
                 
                
-               <div style={ExtendedSite}><p>{this.props.tag}</p></div>
+                <div style={ExtendedSite}><p>{this.props.tag}</p></div>
 
-            </div>
-
-         
-            
-
+            </form>
         );
     }
 }
