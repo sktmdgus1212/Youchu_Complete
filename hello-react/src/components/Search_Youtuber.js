@@ -143,14 +143,14 @@ class Search_Youtuber extends Component{
           
     }
 
-    add_final_list(id,kor_name,tag){
-          
+    add_final_list(image,id,kor_name,tag){
+          console.log(image);
           console.log(id);
           console.log(kor_name);
           console.log(tag);
           let i = this.state.final_return_index;
 
-          
+          this.state.final_return_list[i].image=image;
           this.state.final_return_list[i].id = id;
           this.state.final_return_list[i].kor_name = kor_name;
           this.state.final_return_list[i].tag = tag;
@@ -230,14 +230,16 @@ clear_finallist(){
           const returnList = Object.values(_lists).map( list => {
             return(
               
-              <Lefttop image = {list.image} 
+              <Lefttop 
+              
+                    image = {list.image} 
                       id={list.id} 
                       kor_name={list.kor_name} 
                       tag={list.tag} 
                       id_num={list.id_num}
-                      onSubmit ={ function(id, kor_name,tag){
+                      onSubmit ={ function(image,id, kor_name,tag){
                          console.log(id);
-                        this.add_final_list(id,kor_name,tag);
+                        this.add_final_list(image,id,kor_name,tag);
                         
                         }.bind(this)} 
                          ></Lefttop> 
@@ -248,12 +250,14 @@ clear_finallist(){
           const print_lists = this.state.final_return_list;
           const print_returnList = Object.values(print_lists).map( list => {
             return(
-              <Lefttop image = {list.image} 
+              <Leftbottom 
+              
+                      image = {list.image} 
                       id={list.id} 
                       kor_name={list.kor_name} 
                       tag={list.tag} 
                      
-                         ></Lefttop> 
+                         ></Leftbottom> 
             );
           } 
           )
