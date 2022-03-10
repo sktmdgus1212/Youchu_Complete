@@ -3,8 +3,9 @@ import axios from 'axios'; // 액시오스
 
 class Lefttop extends Component{
 
-    choose_youtuber_data(){
-        var searchingFile = document.getElementById("choose_data").value; 
+    choose_youtuber_data(id){
+        //var searchingFile = document.getElementById("choose_data").name; 
+        var searchingFile = id;
         axios(
             {
               headers: {"Content-Type": "application/json"},
@@ -17,6 +18,7 @@ class Lefttop extends Component{
               //withCredentials: true
             }
           ).then(function (response) {
+              console.log(searchingFile)
           });
     }
 
@@ -48,15 +50,15 @@ class Lefttop extends Component{
                 e.preventDefault();
                 console.log(e.target);
                 //this.props.onSubmit(e);
-                this.choose_youtuber_data();
+                this.choose_youtuber_data(e.target.hidden.value);
                 
                 }.bind(this)} >
            
                <img style={Site} src={this.props.image}></img>
                
-                <div style = {Site}><input  id = "choose_data" type = "submit" value={this.props.id} ></input> </div>
+                <div style = {Site}><input  id = "choose_data" type = "submit" name="id" value={this.props.id} ></input> </div>
                 <div style={Site}><p>{this.props.kor_name}</p></div>
-                
+                <input type = "hidden" name = "hidden" value = {this.props.id_num}></input>
                
                 <div style={ExtendedSite}><p>{this.props.tag}</p></div>
 

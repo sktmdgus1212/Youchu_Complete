@@ -13,18 +13,18 @@ class Search_Youtuber extends Component{
             finalIndex:0,
 
           finallist:[
-            {image:'', kor_name: '', id:'', tag:[] },
-            {image:'', kor_name: '', id:'', tag:[] },
-            {image:'', kor_name: '', id:'', tag:[] },
-            {image:'', kor_name: '', id:'', tag:[] },
-            {image:'', kor_name: '', id:'', tag:[] },
+            {image:'', kor_name: '', id:'', tag:[] , id_num:''},
+            {image:'', kor_name: '', id:'', tag:[] , id_num:''},
+            {image:'', kor_name: '', id:'', tag:[] , id_num:''},
+            {image:'', kor_name: '', id:'', tag:[] , id_num:''},
+            {image:'', kor_name: '', id:'', tag:[] , id_num:''},
           ],
 
             image:'',
             kor_name:'',
             id:'',
-            tag:[]
-
+            tag:[],
+            id_num:''
         }
         this.ChangeMethod=this.ChangeMethod.bind(this);
         this.transmit_youtuber_data=this.transmit_youtuber_data.bind(this);
@@ -103,6 +103,10 @@ class Search_Youtuber extends Component{
                     this.state.finallist[index].id=(values[i].id);
                     console.log(this.state.finallist[index].id);
 
+                    newObject.id_num=values[i].id_num;
+                    this.state.finallist[index].id_num=(values[i].id_num);
+                    console.log(this.state.finallist[index].id_num);
+
                     newObject.tag=[];
 
                 for (let j=0;j<values[i].tag.length;j++){
@@ -161,7 +165,7 @@ class Search_Youtuber extends Component{
         const _lists = this.state.finallist;
           const returnList = Object.values(_lists).map( list => {
             return(
-              <Lefttop image = {list.image} id={list.id} kor_name={list.kor_name} tag={list.tag}></Lefttop> 
+              <Lefttop image = {list.image} id={list.id} kor_name={list.kor_name} tag={list.tag} id_num={list.id_num}></Lefttop> 
             );
           
           })
