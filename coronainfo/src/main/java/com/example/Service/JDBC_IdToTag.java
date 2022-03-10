@@ -22,7 +22,7 @@ public class JDBC_IdToTag {
 	
 	public ArrayList<Integer> fun_idtotag(String id) throws SQLException{
 		ArrayList<Integer> list = new ArrayList<>();	
-		String sql = "SELECT TAG FROM YOUTUBER WHERE id='"+id+"'";
+		String sql = "SELECT TAG FROM YOUTUBER WHERE id_num='"+id+"'";
 
 		Connection con = DriverManager.getConnection(db_info.getUrl(), db_info.getUid(), db_info.getPwd());
 		Statement st = con.createStatement();

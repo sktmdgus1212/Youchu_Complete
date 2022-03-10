@@ -20,12 +20,16 @@ public class JDBC_Recommend {
 			this.jdbc_findingTag = jdbc_findingTag;
 		}
 
-		public ArrayList<Youtuber> recommend_result(int[][] list, int[] user_val) throws ClassNotFoundException, SQLException {
+		public ArrayList<Youtuber> recommend_result(int[][] list, int[] user_val, ArrayList<String> exec_list) throws ClassNotFoundException, SQLException {
 			ArrayList<Youtuber> result_youtuber = new ArrayList<>();
 			int[] weight = new int[list.length];
 			
 			for(int i = 0 ; i < list.length ; i++) {
 				int temp = 0;
+				if(exec_list.contains(Integer.toString(i))) {
+					weight[i] = -1;
+					continue;
+				}
 				for(int j = 0 ; j < list[i].length ;j++) {
 					temp += list[i][j] * user_val[j];
 				}
@@ -55,7 +59,7 @@ public class JDBC_Recommend {
 				String kor_name = rs.getString("KOR_NAME");
 				String id_num_val = rs.getString("ID_NUM");
 				
-				String str_Tag = jdbc_FindingTag.findingTag(tag_val);
+				String str_Tag = jdbc_findingTag.findingTag(tag_val);
 		
 				
 				Youtuber youtuber = new Youtuber(id, image, str_Tag, kor_name, id_num_val);
