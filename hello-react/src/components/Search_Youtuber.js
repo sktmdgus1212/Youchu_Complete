@@ -149,6 +149,7 @@ class Search_Youtuber extends Component{
           console.log(response.data)
         });
   }
+  
     render(){
       var _article = null;
       var num=0;

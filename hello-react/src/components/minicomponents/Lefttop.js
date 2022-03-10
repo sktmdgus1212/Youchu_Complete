@@ -1,10 +1,25 @@
 import React, {Component} from'react';
-
-
+import axios from 'axios'; // 액시오스
 
 class Lefttop extends Component{
+
+    choose_youtuber_data(){ 
+        var searchingFile = document.getElementById("choose_data").value; 
+        axios(
+            {
+              headers: {"Content-Type": "application/json"},
+              url: '/choose_youtuber',
+              method: 'post',
+              data: {
+                name: searchingFile
+              }, 
+              baseURL: 'http://localhost:8080'
+              //withCredentials: true
+            }
+          ).then(function (response) {
+          });
+    }
     render(){
-        
         const st = {
             width:'525px',
             height:'80px',
@@ -16,7 +31,6 @@ class Lefttop extends Component{
             border:'0.01px',
             borderStyle:'dashed',
             float:'left'
-
         }
         const ExtendedSite={
             width: '285px',
@@ -35,9 +49,12 @@ class Lefttop extends Component{
                 <div style={Site}><p><a href = ""  onClick = { function(e){
                     e.preventDefault();
                     console.log(this);
+                    this.choose_youtuber_data();
                     }.bind(this)}>{this.props.id}</a></p></div>
                     
                 <div style={Site}><p>{this.props.kor_name}</p></div>
+                    
+            <div style={Site}><p>{this.props.kor_name}</p></div>
                 
                
                <div style={ExtendedSite}><p> {this.props.tag + ","}</p></div>
