@@ -2,7 +2,7 @@ import React, {Component} from'react';
 import axios from 'axios'; // 액시오스
 
 class Lefttop extends Component{
-    
+
 state={ doubleSubmitFlag:false }
         
 
@@ -21,6 +21,7 @@ state={ doubleSubmitFlag:false }
               //withCredentials: true
             }
           ).then(function (response) {
+              console.log(searchingFile)
           });
     }
 
@@ -73,7 +74,7 @@ state={ doubleSubmitFlag:false }
                 
                 this.props.onSubmit(e.target.id.value, e.target.kor_name.value,e.target.tag.value);
                 console.log(e.target.hidden.value);
-                this.choose_youtuber_data(e.target.dataset.id);
+                this.choose_youtuber_data(e.target.hidden.value);
                 
                 }.bind(this)} >
            
@@ -81,11 +82,11 @@ state={ doubleSubmitFlag:false }
                
                 <div style = {Site}> <input  id = "choose_data" name = "id" data-id="4" type = "submit"  value={this.props.id} ></input> </div>
                 <div style={Site}><input style={{borderStyle:'none'}} type="text" name = "kor_name" value = {this.props.kor_name} ></input></div>
-                <input type = "hidden" id = "hidden" value = "4"></input> 
+                <input type = "hidden" id = "hidden" value = {this.props.id_num}></input> 
                
                 <div style={ExtendedSite}><input style={{borderStyle:'none'}} type="text" name = "tag" value = {this.props.tag} ></input></div>
-
-            </form>
+              
+           </form>
         );
     }
 }

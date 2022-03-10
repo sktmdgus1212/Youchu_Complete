@@ -8,16 +8,18 @@ public class Youtuber {
 	public String image;
 	public String tag;
 	public String kor_name;
+	public String id_num;
 	
 	public Youtuber() {
 		
 	}
 	
-	public Youtuber(String id, String image, String tag, String kor_name) {
+	public Youtuber(String id, String image, String tag, String kor_name, String id_num) {
 		this.id = id;
 		this.image = image;
 		this.tag = tag;
 		this.kor_name = kor_name;
+		this.id_num = id_num;
 	}
 
 
@@ -51,6 +53,14 @@ public class Youtuber {
 
 	public void setKor_name(String kor_name) {
 		this.kor_name = kor_name;
+	}
+
+	public String getId_num() {
+		return id_num;
+	}
+
+	public void setId_num(String id_num) {
+		this.id_num = id_num;
 	}
 
 	

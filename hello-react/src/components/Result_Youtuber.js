@@ -1,6 +1,22 @@
 import React, {Component} from'react';
-
+import axios from 'axios'; // 액시오스
 class Result_Youtuber extends Component{
+
+    receive_result_list(){
+        axios(
+            {
+              headers: {"Content-Type": "application/json"},
+              url: '/send_result',
+              method: 'post',
+              
+              baseURL: 'http://localhost:8080'
+              //withCredentials: true
+            }
+          ).then(function (response) {
+              console.log(response.data)
+          });
+    }
+
     render(){
 
         const middle_space= {
@@ -15,6 +31,7 @@ class Result_Youtuber extends Component{
                 <h2>유투버 추천 결과</h2>
                 <input type = "button" value = "결과 확인하기" onClick = {function (){
                  //함수넣기;
+                 this.receive_result_list()
                 }.bind(this)}></input>
             </section>
         );

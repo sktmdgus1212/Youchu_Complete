@@ -15,11 +15,11 @@ class Search_Youtuber extends Component{
             final_return_index:0,
 
           finallist:[
-            {image:'', kor_name: '', id:'', tag:[] },
-            {image:'', kor_name: '', id:'', tag:[] },
-            {image:'', kor_name: '', id:'', tag:[] },
-            {image:'', kor_name: '', id:'', tag:[] },
-            {image:'', kor_name: '', id:'', tag:[] },
+            {image:'', kor_name: '', id:'', tag:[] , id_num:''},
+            {image:'', kor_name: '', id:'', tag:[] , id_num:''},
+            {image:'', kor_name: '', id:'', tag:[] , id_num:''},
+            {image:'', kor_name: '', id:'', tag:[] , id_num:''},
+            {image:'', kor_name: '', id:'', tag:[] , id_num:''},
           ],
 
           final_return_list:[
@@ -33,8 +33,8 @@ class Search_Youtuber extends Component{
             image:'',
             kor_name:'',
             id:'',
-            tag:[]
-
+            tag:[],
+            id_num:''
         }
         this.ChangeMethod=this.ChangeMethod.bind(this);
         this.transmit_youtuber_data=this.transmit_youtuber_data.bind(this);
@@ -113,6 +113,10 @@ class Search_Youtuber extends Component{
                     newObject.id=values[i].id;
                     this.state.finallist[index].id=(values[i].id);
                     console.log(this.state.finallist[index].id);
+
+                    newObject.id_num=values[i].id_num;
+                    this.state.finallist[index].id_num=(values[i].id_num);
+                    console.log(this.state.finallist[index].id_num);
 
                     newObject.tag=[];
 
@@ -230,12 +234,14 @@ clear_finallist(){
                       id={list.id} 
                       kor_name={list.kor_name} 
                       tag={list.tag} 
+                      id_num={list.id_num}
                       onSubmit ={ function(id, kor_name,tag){
                          console.log(id);
                         this.add_final_list(id,kor_name,tag);
                         
                         }.bind(this)} 
                          ></Lefttop> 
+              
             );
           })
 
