@@ -85,12 +85,13 @@ public class MainController {
 	public Map<String,Object> choose_youtuber(@RequestBody Map<String,Object> map) throws ClassNotFoundException, SQLException {
 		choosed_youtuber_name = (String) map.get("name");
 		ArrayList<Integer> current_tag_list= idToTag.fun_idtotag(choosed_youtuber_name);
-		exec_list.add(choosed_youtuber_name);
-		System.out.print(exec_list.get(0));
+
 		for(int i = 0 ; i < current_tag_list.size() ;i++) {
-			tag_list[current_tag_list.get(i)] += 1;
+			if(!exec_list.contains(choosed_youtuber_name)) {
+				tag_list[current_tag_list.get(i)] += 1;
+			}
 		}
-		
+		exec_list.add(choosed_youtuber_name);
 		return map;
 	}  
 	
@@ -98,6 +99,13 @@ public class MainController {
 	   @RequestMapping(value="/searched_result_youtuber", method=RequestMethod.POST)
 	   public HashMap<String, JSONObject> searched_result_youtuber() throws ClassNotFoundException, SQLException {
 	      
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 	      ArrayList<Youtuber> youtuber = youtuber_db.getList(search);
 	      HashMap<String, JSONObject> jsonall = new HashMap<>();
 	      
