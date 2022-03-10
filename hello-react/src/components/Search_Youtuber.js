@@ -2,6 +2,7 @@ import React, {Component} from'react';
 import axios from 'axios'; // 액시오스
 import Leftbottom from './minicomponents/Leftbottom';
 import Lefttop from './minicomponents/Lefttop';
+import { clear } from '@testing-library/user-event/dist/clear';
 
 class Search_Youtuber extends Component{
     constructor(props){
@@ -11,8 +12,17 @@ class Search_Youtuber extends Component{
             addedlist:[],
             x:null,
             finalIndex:0,
+            final_return_index:0,
 
           finallist:[
+            {image:'', kor_name: '', id:'', tag:[] },
+            {image:'', kor_name: '', id:'', tag:[] },
+            {image:'', kor_name: '', id:'', tag:[] },
+            {image:'', kor_name: '', id:'', tag:[] },
+            {image:'', kor_name: '', id:'', tag:[] },
+          ],
+
+          final_return_list:[
             {image:'', kor_name: '', id:'', tag:[] },
             {image:'', kor_name: '', id:'', tag:[] },
             {image:'', kor_name: '', id:'', tag:[] },
@@ -29,6 +39,7 @@ class Search_Youtuber extends Component{
         this.ChangeMethod=this.ChangeMethod.bind(this);
         this.transmit_youtuber_data=this.transmit_youtuber_data.bind(this);
         this.getData=this.getData.bind(this);
+        this.add_final_list=this.add_final_list.bind(this);
        
     }
 
@@ -128,6 +139,37 @@ class Search_Youtuber extends Component{
           
     }
 
+    add_final_list(id,kor_name,tag){
+          
+          console.log(id);
+          console.log(kor_name);
+          console.log(tag);
+          let i = this.state.final_return_index;
+
+          
+          this.state.final_return_list[i].id = id;
+          this.state.final_return_list[i].kor_name = kor_name;
+          this.state.final_return_list[i].tag = tag;
+           
+           
+           this.setState({
+             final_return_list: this.state.final_return_list,
+             final_return_index:this.state.final_return_index+1
+           })    
+
+           
+
+    }
+
+clear_finallist(){
+  this.setState({finallist:[
+    {image:'', kor_name: '', id:'', tag:[] },
+    {image:'', kor_name: '', id:'', tag:[] },
+    {image:'', kor_name: '', id:'', tag:[] },
+    {image:'', kor_name: '', id:'', tag:[] },
+    {image:'', kor_name: '', id:'', tag:[] },
+  ] })
+}
    
 
     
@@ -154,7 +196,7 @@ class Search_Youtuber extends Component{
       var _article = null;
       var num=0;
       var index = this.state.index;
-
+      var return_final_list=null;
      
   
         const leftSidebar= {
@@ -183,22 +225,47 @@ class Search_Youtuber extends Component{
         const _lists = this.state.finallist;
           const returnList = Object.values(_lists).map( list => {
             return(
-              <Lefttop image = {list.image} id={list.id} kor_name={list.kor_name} tag={list.tag}></Lefttop> 
+              
+              <Lefttop image = {list.image} 
+                      id={list.id} 
+                      kor_name={list.kor_name} 
+                      tag={list.tag} 
+                      onSubmit ={ function(id, kor_name,tag){
+                         console.log(id);
+                        this.add_final_list(id,kor_name,tag);
+                        
+                        }.bind(this)} 
+                         ></Lefttop> 
             );
-          
           })
 
+          const print_lists = this.state.final_return_list;
+          const print_returnList = Object.values(print_lists).map( list => {
+            return(
+              <Lefttop image = {list.image} 
+                      id={list.id} 
+                      kor_name={list.kor_name} 
+                      tag={list.tag} 
+                     
+                         ></Lefttop> 
+            );
+          } 
+          )
+
         return(
-            <aside style = {leftSidebar}>
+            <aside style = {leftSidebar} >{/*onSubmit = >*/}
+
                 <div style= {leftContainer1}>
                 <h2>유투버를 검색하세요.</h2>		
                 <form  onSubmit = { function(e) {
                                 e.preventDefault();
                                 this.props.onSubmit(
                                     e.target.title.value
+                                    
                                 );
                                 this.transmit_youtuber_data();
                                 this.getData();
+                                this.clear_finallist();
                             }.bind(this)} >
 
                         <p><input type ="text" 
@@ -217,6 +284,7 @@ class Search_Youtuber extends Component{
                     <h2>유투버 검색결과</h2>
 
                     {returnList}
+                    
       
                  
                 </div>
@@ -225,8 +293,9 @@ class Search_Youtuber extends Component{
                     
                     
                     <h2>내가 선택한 유투버 목록</h2>
-                    <div > </div>
-                
+
+                    {print_returnList}
+                    
                 
                 
                 

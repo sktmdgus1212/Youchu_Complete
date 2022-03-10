@@ -13,6 +13,9 @@ class Result_Youtuber extends Component{
         return(
             <section style = {middle_space}> 
                 <h2>유투버 추천 결과</h2>
+                <input type = "button" value = "결과 확인하기" onClick = {function (){
+                 //함수넣기;
+                }.bind(this)}></input>
             </section>
         );
     }
