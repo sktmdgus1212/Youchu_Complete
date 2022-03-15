@@ -6,7 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 
 import com.example.Entity.Youtuber;
@@ -32,7 +35,7 @@ public class JDBC_YoutuberService implements Youtuber_db {
 		 * public void setDataSource(DataSource dataSource) { this.dataSource =
 		 * dataSource; }
 		 */
-	public ArrayList<Youtuber> getList(String search) throws ClassNotFoundException, SQLException {
+	public HashMap<String, JSONObject> getList(String search) throws ClassNotFoundException, SQLException {
 		ArrayList<Youtuber> list = new ArrayList<>();	
 		String sql = "SELECT * FROM YOUTUBER WHERE LOWER(id) LIKE LOWER('%"+search+"%') OR KOR_NAME LIKE '%"+search+"%'";
 
@@ -55,10 +58,39 @@ public class JDBC_YoutuberService implements Youtuber_db {
 			list.add(youtuber);
 
 		}
+		
+		 HashMap<String, JSONObject> jsonall = new HashMap<>();
+	      
+	      for(int i = 0 ; i < list.size() ; i++) {
+	         String id = list.get(i).id;
+	         if(jsonall.containsKey(id)) {
+
+	            JSONObject exist_json = jsonall.get(id); //현재 존재하는 object 받기
+
+	            JSONArray exist_jsonarr = (JSONArray) exist_json.get("tag"); //object안에 있는 array받기
+	            exist_jsonarr.add(list.get(i).tag); //array에 새로운 태그 값 추가
+	            //System.out.print(exist_jsonarr);
+	         }
+	         else {
+	         
+	        	 
+	        	JSONObject json = new JSONObject();
+	            JSONArray jsonarray = new JSONArray();
+	            
+	            json.put("id", id);
+	            json.put("image", list.get(i).image);
+	            jsonarray.add(list.get(i).tag);
+	            json.put("tag", jsonarray);
+	            json.put("kor_name", list.get(i).kor_name);
+	            json.put("id_num", list.get(i).id_num);
+	            jsonall.put(id, json);            
+	         }
+	      }
+	      
 		rs.close();
 		st.close();
 		con.close();
 
-		return list;
+		return jsonall;
 	}
 }
