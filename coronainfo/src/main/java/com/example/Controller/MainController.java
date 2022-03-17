@@ -42,10 +42,12 @@ public class MainController {
 	int[][] youtuber_list;
 	ArrayList<String> exec_list;
 	String search;
+	String tag;
 	String choosed_youtuber_name;
 	String choosed_tag_name;
+	String delete_youtuber;
+	String delete_tag;
 	
-	String tag;
 	@Autowired
 	public MainController(Youtuber_db youtuber_db, JDBC_IdToTag idToTag, JDBC_TagSize jdbc_TagSize, JDBC_YoutuberSize jdbc_YoutuberSize, JDBC_FillMatrix fillMatrix, JDBC_Recommend jdbc_Recommend, JDBC_TagService jdbc_TagService, JDBC_TagToId jdbc_TagToId) {
 		this.youtuber_db = youtuber_db;
@@ -109,6 +111,29 @@ public class MainController {
 			return map;
 		}  
 		
+		//유튜버 삭제
+		@RequestMapping(value="/delete_youtuber", method=RequestMethod.POST)
+		public Map<String,Object> delete_youtuber(@RequestBody Map<String,Object> map) throws ClassNotFoundException, SQLException {
+			delete_youtuber = (String) map.get("name");
+			ArrayList<Integer> current_tag_list= idToTag.fun_idtotag(delete_youtuber);
+			
+			for(int i = 0 ; i < current_tag_list.size() ;i++) {
+					tag_list[current_tag_list.get(i)] -= 1;
+				
+			}
+			return map;
+		} 
+		
+		//태그 삭제
+				@RequestMapping(value="/delete_tag", method=RequestMethod.POST)
+				public Map<String,Object> delete_tag(@RequestBody Map<String,Object> map) throws ClassNotFoundException, SQLException {
+					delete_tag = (String) map.get("tag");
+					int current_tag_num= jdbc_TagToId.fun_tagtoid(delete_tag);
+					
+					tag_list[current_tag_num] -= 1;
+					return map;
+				} 
+				
 	//검색된 유튜버 결과 전송
 	@ResponseBody
 	   @RequestMapping(value="/searched_result_youtuber", method=RequestMethod.POST)
