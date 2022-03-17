@@ -57,7 +57,7 @@ public class JDBC_Recommend {
 			while (rs.next()) {
 				String id = rs.getString("ID");
 				String image = rs.getString("IMAGE");
-				int tag_val = rs.getInt("TAG");
+				String tag_val = rs.getString("TAG");
 				String kor_name = rs.getString("KOR_NAME");
 				String id_num_val = rs.getString("ID_NUM");
 				

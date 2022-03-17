@@ -46,7 +46,7 @@ public class JDBC_YoutuberService implements Youtuber_db {
 		while (rs.next()) {
 			String id = rs.getString("ID");
 			String image = rs.getString("IMAGE");
-			int tag = rs.getInt("TAG");
+			String tag = rs.getString("TAG");
 			String kor_name = rs.getString("KOR_NAME");
 			String id_num = rs.getString("ID_NUM");
 			
