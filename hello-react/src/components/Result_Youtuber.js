@@ -38,6 +38,7 @@ class Result_Youtuber extends Component{
             console.log("키의 숫자는: " + keys);
             let values = Object.values(data);
             let index=0;
+            console.log(data);
 
             {/*for(let i=0;i<keys;i++, index++){
               

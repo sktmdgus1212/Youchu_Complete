@@ -104,8 +104,7 @@ public class MainController {
 		@RequestMapping(value="/choose_tag", method=RequestMethod.POST)
 		public Map<String,Object> choose_tag(@RequestBody Map<String,Object> map) throws ClassNotFoundException, SQLException {
 			choosed_tag_name = (String) map.get("tag");
-			int current_tag_num= jdbc_TagToId.fun_tagtoid(choosed_youtuber_name);
-			System.out.println("aaaaa"+current_tag_num);
+			int current_tag_num =  Integer.parseInt(choosed_tag_name);
 			tag_list[current_tag_num] += 1;
 			
 			return map;

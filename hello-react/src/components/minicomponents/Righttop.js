@@ -3,8 +3,8 @@ import axios from 'axios';
 
 class Righttop extends Component{
 
-    choose_tag_data(id){ 
-        var searchingFile = id;
+    choose_tag_data(hidden){ 
+        var searchingFile = hidden;
         axios(
             {
               headers: {"Content-Type": "application/json"},
@@ -40,7 +40,7 @@ class Righttop extends Component{
             e.preventDefault();
                 
                 this.props.onSubmit(e.target.id.value); 
-                this.choose_tag_data(e.target.id.value);
+                this.choose_tag_data(e.target.hidden.value);
                 
                 
                 }.bind(this)}>
