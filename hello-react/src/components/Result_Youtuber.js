@@ -102,7 +102,7 @@ class Result_Youtuber extends Component{
               
               <CenterResult
               
-                     image = {list.image} 
+                    image = {list.image} 
                       id={list.id} 
                       kor_name={list.kor_name} 
                       tag={list.tag} 
