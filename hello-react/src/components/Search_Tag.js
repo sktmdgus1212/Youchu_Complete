@@ -178,7 +178,7 @@ class Search_Tag extends Component{
                     {returnList}
                     
                 </div>
-				<div style = {leftContainer2}><h2>내가 선택한 영상 태그 목록</h2>dd</div>	
+				<div style = {leftContainer2}><h2>내가 선택한 영상 태그 목록</h2></div>	
                     {print_returnList}
             </aside>
         );
