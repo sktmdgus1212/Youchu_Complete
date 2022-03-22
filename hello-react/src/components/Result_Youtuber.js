@@ -1,5 +1,6 @@
 import React, {Component} from'react';
 import axios from 'axios'; // 액시오스
+import CenterResult from './minicomponents/CenterResult';
 class Result_Youtuber extends Component{
 
     constructor(props){
@@ -45,7 +46,7 @@ class Result_Youtuber extends Component{
                 var newObject = new Object();
 
                     newObject.image= baseUrl+values[i].image;
-                    this.state.result_YoutuberList[index].image =baseUrl+values[i].image;
+                    this.state.result_YoutuberList[0].image =baseUrl+values[i].image;
                     console.log(this.state.result_YoutuberList[index].image);
 
                     newObject.kor_name=values[i].kor_name;
@@ -79,7 +80,7 @@ class Result_Youtuber extends Component{
                     finalIndex: index
                     
                 })
-                console.log(this.state.finallist);
+                console.log(this.state.result_YoutuberList);
                 console.log(this.state.finalIndex);
           }.bind(this));    
           
@@ -87,13 +88,30 @@ class Result_Youtuber extends Component{
 
 
     render(){
-
         const middle_space= {
             width: '390px',  /* 본문의 너비 */
             height:'900px',   /* 본문의 높이 */
             backgroundColor: '#f7f7f7',
             float: 'left'  /* 왼쪽으로 플로팅 */
           }
+
+          const _lists = this.state.result_YoutuberList;
+          const returnList = Object.values(_lists).map( list => {
+            return(
+              
+              <CenterResult
+              
+                     image = {list.image} 
+                      id={list.id} 
+                      kor_name={list.kor_name} 
+                      tag={list.tag} 
+                      id_num={list.id_num}
+                      
+               ></CenterResult> 
+              
+            );
+          })
+        
 
         return(
             <section style = {middle_space}> 
@@ -103,6 +121,7 @@ class Result_Youtuber extends Component{
                  this.receive_result_list()
                 }.bind(this)}></input>
                 <hr></hr>
+                
                 
 
 

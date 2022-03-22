@@ -18,7 +18,18 @@ class Search_Tag extends Component{
 
             searchedTagIndex:0,
 
-            finalTagList:[],
+            finalTagList:[
+              {cnt: '', tag: ''},
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''}
+            ],
 
             finalTagIndex:0
         }
@@ -81,7 +92,7 @@ class Search_Tag extends Component{
             ]
 
             for(let i=0;i<keys;i++, index++){
-                    console.log(this.state.searchedTagList[index]?.cnt);
+                    
                     shit[index].cnt=key[i];
                     shit[index].tag=values[i];
                     console.log(values[i]);
@@ -102,14 +113,16 @@ class Search_Tag extends Component{
           
     }
     
-    add_finalTagList(tag){
+    add_finalTagList(cnt, tag){
        
-        console.log(tag);
+        
         let i = this.state.finalTagIndex;
         console.log(i);
 
-       
-        this.state.finalTagList[i]=tag;
+
+        this.state.finalTagList[i].cnt=cnt;
+        this.state.finalTagList[i].tag=tag;
+
          
          
          this.setState({
@@ -123,7 +136,13 @@ class Search_Tag extends Component{
 
   clear_searchedTagList(){
     this.setState({
-        searchedTagList:[]})
+        searchedTagList:[
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''}
+        ]})
   }
     
     
@@ -153,7 +172,7 @@ class Search_Tag extends Component{
 
 
           const _lists = this.state.searchedTagList;
-          const returnList = _lists&&_lists.map( list => {
+          const returnList = Object.values(_lists).map( list => {
             return(
               
               <Righttop 
@@ -161,9 +180,9 @@ class Search_Tag extends Component{
                       cnt = {list.cnt}
                       tag={list.tag} 
                      
-                      onSubmit ={ function(tag){
-                            console.log(tag);
-                            this.add_finalTagList(tag);
+                      onSubmit ={ function(cnt,tag){
+                            
+                            this.add_finalTagList(cnt,tag);
                         
                         }.bind(this)} 
                 ></Righttop> 
@@ -176,7 +195,7 @@ class Search_Tag extends Component{
           const print_lists = this.state.finalTagList;
           const onRemove = tag => {
             
-            const nextArray = print_lists.filter(list=> list != tag);
+            const nextArray = print_lists.filter(list=> list.tag != tag);
 
             this.setState({
               finalTagList: nextArray,
@@ -185,10 +204,11 @@ class Search_Tag extends Component{
 
           }
 
-          const print_returnList = print_lists && print_lists.map( list => {
+          const print_returnList = Object.values(print_lists).map( list => {
             return(
               <Rightbottom 
-                tag={list}
+                cnt={list.cnt}
+                tag={list.tag}
                  
                 onSubmit = {function(_mola){
                         
