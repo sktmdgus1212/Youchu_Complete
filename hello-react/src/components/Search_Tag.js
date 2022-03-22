@@ -1,7 +1,99 @@
 import React, {Component} from'react';
-import Rightttop from './minicomponents/Righttop';
-
+import Righttop from './minicomponents/Righttop';
+import axios from 'axios';
 class Search_Tag extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            searchedTagList:[],
+            searchedTagIndex:0,
+            fianlTagList:[],
+            finalTagIndex:0
+        }
+    }
+    
+    
+    
+    
+    transmit_tag_data(){ 
+        var searchingFile = document.getElementById("tag_data").value; 
+        axios(
+            {
+              headers: {"Content-Type": "application/json"},
+              url: '/search_tag',
+              method: 'post',
+              data: {
+                name: searchingFile
+              }, 
+              baseURL: 'http://localhost:8080'
+              //withCredentials: true
+            }
+          ).then(function (response) {
+          });
+    }
+    
+    get_tag_Data(){ 
+    
+        
+        axios(
+            {
+              headers: {"Content-Type": "application/json"},
+              url: '/searched_tag',
+              method: 'post',
+              baseURL: 'http://localhost:8080'
+              //withCredentials: true
+            }
+          ).then(function (response) {
+            return response.data;
+            
+          })
+          .then(function(data){
+
+            let keys = Object.keys(data).length;
+            console.log("키의 숫자는: " + keys);
+            let values = Object.values(data);
+            let index=0;
+
+            for(let i=0;i<keys;i++, index++){
+              
+                var newObject = new Object();
+
+                    this.state.searchedTagList[index] =values[i].tag;
+                    console.log(this.state.searchedTagList[index]);
+
+            }
+                    
+            
+                this.setState({
+                    searchedTagList: this.state.searchedTagList,
+                    searchedTagIndex: index
+                                        
+                })
+                console.log(this.state.finallist);
+            
+          }.bind(this));    
+          
+    }
+    
+    add_finalTagList(tag){
+       
+        console.log(tag);
+        let i = this.state.finallTagIndex;
+
+       
+        this.state.finalTagList[i]=tag;
+         
+         
+         this.setState({
+           finalTagList: this.state.finalTagList,
+           finalTagIndex:this.state.finalTagIndex+1
+         })    
+
+         
+
+  }
+    
+    
     render(){
 
         const rightSidebar= {
@@ -27,25 +119,67 @@ class Search_Tag extends Component{
 
 
 
+          const _lists = this.state.searchedTagList;
+          const returnList = _lists&&_lists.map( list => {
+            return(
+              
+              <Righttop 
+              
+                     
+                      tag={list} 
+                     
+                      onSubmit ={ function(tag){
+                            console.log(tag);
+                            this.add_finalTagist(tag);
+                        
+                        }.bind(this)} 
+                ></Righttop> 
+              
+            );
+          })
+
+          const print_lists = this.state.finalTagList;
+          const print_returnList = print_lists && print_lists.map( list => {
+            return(
+              <Righttop>
+                      tag={list} 
+              </Righttop>
+            );
+          } 
+          )
+
+
         return(
             <aside style = {rightSidebar}>
                 <div style= {leftContainer1}>
                     <h2>영상 태그를 검색하세요.</h2>		
-                    <form action = "/search_youtuber" method = "post">
-                        <input type ="text" size="35" placeholder="크리에이터 이름을 검색하세요"></input>
-                        <input type = "button" value = "검색"></input>
+                    <form  onSubmit = { function(e) {
+                                e.preventDefault();
+                                this.props.onSubmit(
+                                    e.target.title.value
+                                );
+                                this.transmit_tag_data();
+                                this.get_tag_Data();
+                                //this.clear_finallist();
+                            }.bind(this)} >
+
+                        <p><input type ="text" 
+                            name="title"
+                            size="35" 
+                            placeholder="태그를 검색하세요"
+                            id="tag_data"
+                            >
+                            </input></p>
+                        <p> <input type = "submit" value = "검색"></input></p>
                     </form>
                 </div>
                 <div style = {leftContainer2}>
                     <h2>관련 영상 태그 검색결과</h2>
-                    <hr></hr>
-                    <Rightttop tag = "축구"></Rightttop>
-                    <Rightttop tag = "롤"></Rightttop>
-                    <Rightttop tag = "올림픽"></Rightttop>
+                    {returnList}
                     
                 </div>
-				<div style = {leftContainer2}><h2>내가 선택한 영상 태그 목록</h2></div>	
-            
+				<div style = {leftContainer2}><h2>내가 선택한 영상 태그 목록</h2>dd</div>	
+                    {print_returnList}
             </aside>
         );
     }

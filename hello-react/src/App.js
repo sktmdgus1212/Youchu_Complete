@@ -33,7 +33,9 @@ function App() {
               console.log(_title);
           }.bind(this)}></Search_Youtuber>
     <Result_Youtuber></Result_Youtuber>
-    <Search_Tag></Search_Tag>
+    <Search_Tag onSubmit = {function(_tag){
+        console.log(_tag);
+    }.bind(this)}></Search_Tag>
    </div>
   );
 }
