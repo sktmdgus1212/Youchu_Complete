@@ -45,17 +45,18 @@ class Lefttop extends Component{
             backgroundColor:"white"
         }
         const Site={
-            width: '80px',
-            height:'80px',
-            border:'0.01px',
-            borderStyle:'dashed',
+            width: '90px',
+            height:'90px',
+            border:'0.001px',
+            borderStyle:'solid',
             float:'left'
         }
+     
         const ExtendedSite={
-            width: '285px',
-            height:'80px',
-            border:'0.01px',
-            borderStyle:'dashed',
+            width: '255px',
+            height:'90px',
+            border:'0.001px',
+            borderStyle:'solid',
             float:'right'
         }
     
@@ -84,11 +85,11 @@ class Lefttop extends Component{
                 
                 <input type = "hidden" name= "hidden2" value = {this.props.image}></input> 
                 <img  style={Site}  src={this.props.image}></img>
-                <div style = {Site}> <input  id = "choose_data" name = "id" type = "submit"  value={this.props.id} ></input> </div>
-                <div style={Site}><input style={{borderStyle:'none'}} type="text" name = "kor_name" value = {this.props.kor_name} ></input></div>
+                <div style = {Site}> <input  autocomplete="off" style={{borderStyle:'none'}} id = "choose_data" name = "id" type = "submit"  value={this.props.id} ></input> </div>
+                <div style={Site}><input autocomplete="off" style={{borderStyle:'none'}} type="text" size='7' name = "kor_name" value = {this.props.kor_name} ></input></div>
                 <input type = "hidden" name = "hidden" value = {this.props.id_num}></input> 
                
-                <div style={ExtendedSite}><input style={{borderStyle:'none'}} size='35' type="text" name = "tag" value = {this.props.tag} ></input></div>
+                <div style={ExtendedSite}><input autocomplete="off" style={{borderStyle:'none'}} size='35' type="text" name = "tag" value = {this.props.tag} ></input></div>
               
            </form>
         );

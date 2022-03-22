@@ -91,8 +91,10 @@ class Result_Youtuber extends Component{
         const middle_space= {
             width: '390px',  /* 본문의 너비 */
             height:'900px',   /* 본문의 높이 */
-            backgroundColor: '#f7f7f7',
-            float: 'left'  /* 왼쪽으로 플로팅 */
+            backgroundColor: 'white',
+            float: 'left',  /* 왼쪽으로 플로팅 */
+            position:'fixed',
+            left: '575px'
           }
 
           const _lists = this.state.result_YoutuberList;
@@ -120,16 +122,8 @@ class Result_Youtuber extends Component{
                  //함수넣기;
                  this.receive_result_list()
                 }.bind(this)}></input>
-                <hr></hr>
-                {returnList}
                 
-
-
-
-
-
-
-
+                {returnList}
 
             </section>
         );
