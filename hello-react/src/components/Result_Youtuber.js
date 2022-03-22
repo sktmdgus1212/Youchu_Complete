@@ -8,10 +8,7 @@ class Result_Youtuber extends Component{
             finalIndex:0,
             result_YoutuberList:[
                 {image:'', kor_name: '', id:'', tag:[] , id_num:''},
-                {image:'', kor_name: '', id:'', tag:[] , id_num:''},
-                {image:'', kor_name: '', id:'', tag:[] , id_num:''},
-                {image:'', kor_name: '', id:'', tag:[] , id_num:''},
-                {image:'', kor_name: '', id:'', tag:[] , id_num:''},
+                
               ]
         }
 
@@ -105,6 +102,8 @@ class Result_Youtuber extends Component{
                  //함수넣기;
                  this.receive_result_list()
                 }.bind(this)}></input>
+                <hr></hr>
+                
 
 
 

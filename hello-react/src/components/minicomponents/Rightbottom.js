@@ -24,7 +24,13 @@ class Rightbottom extends Component{
 
 
     return(
-        <div>{this.props.tag}</div>
+        <form onSubmit = {function(e){
+            e.preventDefault();
+            
+            this.props.onSubmit(e.target.id.value);
+        }.bind(this)}>
+        <div><input type = "submit" name = "id" value = {this.props.tag} ></input></div>
+        </form>
 
 
     );

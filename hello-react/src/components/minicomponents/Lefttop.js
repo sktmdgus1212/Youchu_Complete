@@ -27,7 +27,6 @@ class Lefttop extends Component{
               //withCredentials: true
             }
           ).then(function (response) {
-              console.log(searchingFile)
           });
     }
 
