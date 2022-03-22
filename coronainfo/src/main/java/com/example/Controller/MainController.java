@@ -47,7 +47,7 @@ public class MainController {
 	String choosed_tag_name;
 	String delete_youtuber;
 	String delete_tag;
-	
+	boolean empty_result = true;
 	@Autowired
 	public MainController(Youtuber_db youtuber_db, JDBC_IdToTag idToTag, JDBC_TagSize jdbc_TagSize, JDBC_YoutuberSize jdbc_YoutuberSize, JDBC_FillMatrix fillMatrix, JDBC_Recommend jdbc_Recommend, JDBC_TagService jdbc_TagService, JDBC_TagToId jdbc_TagToId) {
 		this.youtuber_db = youtuber_db;
@@ -90,7 +90,7 @@ public class MainController {
 	public Map<String,Object> choose_youtuber(@RequestBody Map<String,Object> map) throws ClassNotFoundException, SQLException {
 		choosed_youtuber_name = (String) map.get("name");
 		ArrayList<Integer> current_tag_list= idToTag.fun_idtotag(choosed_youtuber_name);
-
+		empty_result = false;
 		for(int i = 0 ; i < current_tag_list.size() ;i++) {
 			if(!exec_list.contains(choosed_youtuber_name)) {
 				tag_list[current_tag_list.get(i)] += 1;
@@ -105,6 +105,7 @@ public class MainController {
 		public Map<String,Object> choose_tag(@RequestBody Map<String,Object> map) throws ClassNotFoundException, SQLException {
 			choosed_tag_name = (String) map.get("tag");
 			int current_tag_num =  Integer.parseInt(choosed_tag_name);
+			empty_result = false;
 			tag_list[current_tag_num] += 1;
 			
 			return map;
@@ -167,7 +168,10 @@ public class MainController {
 	@ResponseBody
 	   @RequestMapping(value="/send_result", method=RequestMethod.POST)
 	   public HashMap<String, JSONObject> send_result() throws ClassNotFoundException, SQLException {
-	      HashMap<String, JSONObject> result = jdbc_Recommend.recommend_result(youtuber_list, tag_list, exec_list);
+		 HashMap<String, JSONObject> result = null;
+		  if(!empty_result) {
+			  result = jdbc_Recommend.recommend_result(youtuber_list, tag_list, exec_list);
+		  }
 	      return result;
 	   }
 	
