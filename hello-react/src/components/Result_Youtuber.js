@@ -46,7 +46,7 @@ class Result_Youtuber extends Component{
                 var newObject = new Object();
 
                     newObject.image= baseUrl+values[i].image;
-                    this.state.result_YoutuberList[0].image =baseUrl+values[i].image;
+                    this.state.result_YoutuberList[index].image =baseUrl+values[i].image;
                     console.log(this.state.result_YoutuberList[index].image);
 
                     newObject.kor_name=values[i].kor_name;
@@ -67,7 +67,7 @@ class Result_Youtuber extends Component{
                    newObject.tag[j]=values[i].tag[j];
 
                    tagList.push(newObject.tag[j]);
-                   this.state.result_YoutuberList=[];[index].tag = tagList
+                   this.state.result_YoutuberList[index].tag = tagList
 
                    console.log(this.state.result_YoutuberList[index].tag);
                 } 
@@ -101,7 +101,7 @@ class Result_Youtuber extends Component{
               
               <CenterResult
               
-                     image = {list.image} 
+                    image = {list.image} 
                       id={list.id} 
                       kor_name={list.kor_name} 
                       tag={list.tag} 
@@ -121,7 +121,7 @@ class Result_Youtuber extends Component{
                  this.receive_result_list()
                 }.bind(this)}></input>
                 <hr></hr>
-                
+                {returnList}
                 
 
 
