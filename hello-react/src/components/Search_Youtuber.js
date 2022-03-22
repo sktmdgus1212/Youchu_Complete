@@ -23,16 +23,16 @@ class Search_Youtuber extends Component{
           ],
 
           final_return_list:[
-            {image:'', kor_name: '', id:'', tag:[] },
-            {image:'', kor_name: '', id:'', tag:[] },
-            {image:'', kor_name: '', id:'', tag:[] },
-            {image:'', kor_name: '', id:'', tag:[] },
-            {image:'', kor_name: '', id:'', tag:[] },
-            {image:'', kor_name: '', id:'', tag:[] },
-            {image:'', kor_name: '', id:'', tag:[] },
-            {image:'', kor_name: '', id:'', tag:[] },
-            {image:'', kor_name: '', id:'', tag:[] },
-            {image:'', kor_name: '', id:'', tag:[] },
+            {image:'', kor_name: '', id:'', tag:[], id_num:'' },
+            {image:'', kor_name: '', id:'', tag:[],id_num:'' },
+            {image:'', kor_name: '', id:'', tag:[],id_num:'' },
+            {image:'', kor_name: '', id:'', tag:[],id_num:'' },
+            {image:'', kor_name: '', id:'', tag:[],id_num:'' },
+            {image:'', kor_name: '', id:'', tag:[],id_num:'' },
+            {image:'', kor_name: '', id:'', tag:[],id_num:'' },
+            {image:'', kor_name: '', id:'', tag:[],id_num:'' },
+            {image:'', kor_name: '', id:'', tag:[],id_num:'' },
+            {image:'', kor_name: '', id:'', tag:[],id_num:'' },
             
           ],
 
@@ -42,20 +42,12 @@ class Search_Youtuber extends Component{
             tag:[],
             id_num:''
         }
-        this.ChangeMethod=this.ChangeMethod.bind(this);
+        
         this.transmit_youtuber_data=this.transmit_youtuber_data.bind(this);
         this.getData=this.getData.bind(this);
         this.add_final_list=this.add_final_list.bind(this);
        
     }
-
-    ChangeMethod(name){
-        this.state.addedlist=this.state.lists.concat(name+ " ");
-        this.setState({
-            lists:this.state.addedlist
-         })
-    }
-    
 
     transmit_youtuber_data(){ 
         var searchingFile = document.getElementById("search_data").value; 
@@ -76,14 +68,10 @@ class Search_Youtuber extends Component{
 
 
     getData(){ 
-        var _article = null;
-        var imageList=[];
-        var kor_nameList=[];
-        var idList = [];
+        
         var tagList=[];
-        var _article = null;
         var baseUrl = "/img/";
-        var result = {};
+        
 
         axios(
             {
@@ -149,7 +137,7 @@ class Search_Youtuber extends Component{
           
     }
 
-    add_final_list(image,id,kor_name,tag){
+    add_final_list(image,id,kor_name,tag,id_num){
           console.log(image);
           console.log(id);
           console.log(kor_name);
@@ -160,6 +148,7 @@ class Search_Youtuber extends Component{
           this.state.final_return_list[i].id = id;
           this.state.final_return_list[i].kor_name = kor_name;
           this.state.final_return_list[i].tag = tag;
+          this.state.final_return_list[i].id_num=id_num;
            
            
            this.setState({
@@ -173,11 +162,11 @@ class Search_Youtuber extends Component{
 
 clear_finallist(){
   this.setState({finallist:[
-    {image:'', kor_name: '', id:'', tag:[] },
-    {image:'', kor_name: '', id:'', tag:[] },
-    {image:'', kor_name: '', id:'', tag:[] },
-    {image:'', kor_name: '', id:'', tag:[] },
-    {image:'', kor_name: '', id:'', tag:[] },
+    {image:'', kor_name: '', id:'', tag:[] , id_num:''},
+    {image:'', kor_name: '', id:'', tag:[],id_num:'' },
+    {image:'', kor_name: '', id:'', tag:[],id_num:'' },
+    {image:'', kor_name: '', id:'', tag:[],id_num:'' },
+    {image:'', kor_name: '', id:'', tag:[],id_num:'' },
     
   ] })
 }
@@ -244,9 +233,9 @@ clear_finallist(){
                       kor_name={list.kor_name} 
                       tag={list.tag} 
                       id_num={list.id_num}
-                      onSubmit ={ function(image,id, kor_name,tag){
+                      onSubmit ={ function(image,id, kor_name,tag,id_num){
                          
-                        this.add_final_list(image,id,kor_name,tag);
+                        this.add_final_list(image,id,kor_name,tag,id_num);
                         
                         }.bind(this)} 
                          ></Lefttop> 
@@ -275,6 +264,7 @@ clear_finallist(){
                       id={list.id} 
                       kor_name={list.kor_name} 
                       tag={list.tag} 
+                      id_num={list.id_num}
                       onSubmit = {function(_mola){
                         
                         onRemove(_mola);

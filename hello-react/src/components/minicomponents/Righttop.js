@@ -40,7 +40,7 @@ class Righttop extends Component{
             e.preventDefault();
             if(window.confirm("이 태그가 중복되지 않았는지 확인하세요: "+e.target.id.value )){
                 
-                this.props.onSubmit(e.target.id.value); 
+                this.props.onSubmit(e.target.hidden.value, e.target.id.value); 
                 this.choose_tag_data(e.target.hidden.value);
                 alert("선택목록에 추가했습니다: "+e.target.id.value);
            }
