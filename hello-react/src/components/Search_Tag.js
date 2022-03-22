@@ -72,10 +72,19 @@ class Search_Tag extends Component{
             console.log("내용의 값은: " +values);
 
             let index=0;
+
+            let shit = [
+              {cnt: '', tag: ''},
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''}
+            ]
+
             for(let i=0;i<keys;i++, index++){
                     console.log(this.state.searchedTagList[index]?.cnt);
-                    this.state.searchedTagList[index].cnt=key[i];
-                    this.state.searchedTagList[index].tag=values[i];
+                    shit[index].cnt=key[i];
+                    shit[index].tag=values[i];
                     console.log(values[i]);
                     //console.log(this.state.searchedTagList[index].tag);
 
@@ -83,7 +92,8 @@ class Search_Tag extends Component{
                     
             
                 this.setState({
-                    searchedTagList: this.state.searchedTagList,
+                    searchedTagList: shit,
+                    //searchedTagList: this.state.searchedTagList,
                     searchedTagIndex: index
                                         
                 })
@@ -149,8 +159,8 @@ class Search_Tag extends Component{
               
               <Righttop 
               
-                     
-                      tag={list} 
+                      cnt = {list.cnt}
+                      tag={list.tag} 
                      
                       onSubmit ={ function(tag){
                             console.log(tag);
