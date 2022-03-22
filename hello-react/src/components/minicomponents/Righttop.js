@@ -11,7 +11,7 @@ class Righttop extends Component{
               url: '/choose_tag',
               method: 'post',
               data: {
-                name: searchingFile
+                tag: searchingFile
               }, 
               baseURL: 'http://localhost:8080'
               //withCredentials: true
@@ -45,7 +45,8 @@ class Righttop extends Component{
                 
                 }.bind(this)}>
 
-                <div> <input  id = "choose_tag_data" name = "id" type = "submit"  value={this.props.id} ></input> </div>
+                <div> <input  id = "choose_tag_data" name = "id" type = "submit"  value={this.props.tag} ></input> </div>
+                <input type = "hidden" name = "hidden" value = {this.props.id_num}></input> 
            </form>
                
         
