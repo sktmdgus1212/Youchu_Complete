@@ -5,6 +5,7 @@ class Result_Youtuber extends Component{
     constructor(props){
         super(props);
         this.state={
+            finalIndex:0,
             result_YoutuberList:[
                 {image:'', kor_name: '', id:'', tag:[] , id_num:''},
                 {image:'', kor_name: '', id:'', tag:[] , id_num:''},
@@ -20,6 +21,8 @@ class Result_Youtuber extends Component{
 
 
     receive_result_list(){
+        var tagList=[];
+        var baseUrl = "/img/"
         axios(
             {
               headers: {"Content-Type": "application/json"},
@@ -34,30 +37,31 @@ class Result_Youtuber extends Component{
             
         }).then(function(data){
              
-              let keys = Object.keys(data).length;
+            let keys = Object.keys(data).length;
             console.log("키의 숫자는: " + keys);
             let values = Object.values(data);
+            
             let index=0;
 
-            {/*for(let i=0;i<keys;i++, index++){
+            for(let i=0;i<keys;i++, index++){
               
                 var newObject = new Object();
 
-                    newObject.image= baseURL+values[i].image;
-                    this.state.finallist[index].image =baseURL+values[i].image;
-                    console.log(this.state.finallist[index].image);
+                    newObject.image= baseUrl+values[i].image;
+                    this.state.result_YoutuberList[index].image =baseUrl+values[i].image;
+                    console.log(this.state.result_YoutuberList[index].image);
 
                     newObject.kor_name=values[i].kor_name;
-                    this.state.finallist[index].kor_name =values[i].kor_name;
-                    console.log(this.state.finallist[index].kor_name);
+                    this.state.result_YoutuberList[index].kor_name =values[i].kor_name;
+                    console.log(this.state.result_YoutuberList[index].kor_name);
 
                     newObject.id=values[i].id;
-                    this.state.finallist[index].id=(values[i].id);
-                    console.log(this.state.finallist[index].id);
+                    this.state.result_YoutuberList[index].id=(values[i].id);
+                    console.log(this.state.result_YoutuberList[index].id);
 
                     newObject.id_num=values[i].id_num;
-                    this.state.finallist[index].id_num=(values[i].id_num);
-                    console.log(this.state.finallist[index].id_num);
+                    this.state.result_YoutuberList[index].id_num=(values[i].id_num);
+                    console.log(this.state.result_YoutuberList[index].id_num);
 
                     newObject.tag=[];
 
@@ -65,16 +69,16 @@ class Result_Youtuber extends Component{
                    newObject.tag[j]=values[i].tag[j];
 
                    tagList.push(newObject.tag[j]);
-                   this.state.finallist[index].tag = tagList
+                   this.state.result_YoutuberList=[];[index].tag = tagList
 
-                   console.log(this.state.finallist[index].tag);
+                   console.log(this.state.result_YoutuberList[index].tag);
                 } 
                 tagList=[];
 
-            }*/}
+            }
             
                 this.setState({
-                    finallist: this.state.finallist,
+                    result_YoutuberList: this.state.result_YoutuberList,
                     finalIndex: index
                     
                 })

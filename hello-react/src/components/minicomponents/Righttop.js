@@ -3,8 +3,8 @@ import axios from 'axios';
 
 class Righttop extends Component{
 
-    choose_tag_data(id){ 
-        var searchingFile = id;
+    choose_tag_data(hidden){ 
+        var searchingFile = hidden;
         axios(
             {
               headers: {"Content-Type": "application/json"},
@@ -38,10 +38,13 @@ class Righttop extends Component{
         return(
            <form onSubmit={ function(e){
             e.preventDefault();
+            if(window.confirm("이 태그가 중복되지 않았는지 확인하세요: "+e.target.id.value )){
                 
                 this.props.onSubmit(e.target.id.value); 
-                this.choose_tag_data(e.target.id.value);
-                
+                this.choose_tag_data(e.target.hidden.value);
+
+                alert("선택목록에 추가했습니다: "+e.target.id.value);
+           }
                 
                 }.bind(this)}>
 
