@@ -58,7 +58,7 @@ class Search_Tag extends Component{
               
                 var newObject = new Object();
 
-                    this.state.searchedTagList[index] =values[i].tag;
+                    this.state.searchedTagList[index] =values[i].tag_name;
                     console.log(this.state.searchedTagList[index]);
 
             }
@@ -91,6 +91,11 @@ class Search_Tag extends Component{
 
          
 
+  }
+
+  clear_searchedTagList(){
+    this.setState({
+        searchedTagList:[]})
   }
     
     
@@ -160,7 +165,7 @@ class Search_Tag extends Component{
                                 );
                                 this.transmit_tag_data();
                                 this.get_tag_Data();
-                                //this.clear_finallist();
+                                this.clear_searchedTagList();
                             }.bind(this)} >
 
                         <p><input type ="text" 
