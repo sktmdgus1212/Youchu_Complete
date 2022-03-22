@@ -56,7 +56,6 @@ class Righttop extends Component{
                 
                 this.props.onSubmit(e.target.hidden.value, e.target.id.value); 
                 this.choose_tag_data(e.target.hidden.value);
-
                 alert("선택목록에 추가했습니다: "+e.target.id.value);
            }
                 

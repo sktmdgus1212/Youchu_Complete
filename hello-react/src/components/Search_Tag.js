@@ -2,6 +2,8 @@ import React, {Component} from'react';
 import Righttop from './minicomponents/Righttop';
 import axios from 'axios';
 import Rightbottom from './minicomponents/Rightbottom';
+import './Scroll.css';
+
 class Search_Tag extends Component{
     constructor(props){
         super(props);
@@ -83,6 +85,7 @@ class Search_Tag extends Component{
             console.log("내용의 값은: " +values);
 
             let index=0;
+
             let shit = [
               {cnt: '', tag: ''},
              {cnt: '', tag: ''},
@@ -151,16 +154,24 @@ class Search_Tag extends Component{
         const rightSidebar= {
             width: '525px',   /* 사이드바의 너비 */
             height:'900px',  /* 사이드바의 높이 */
+            borderTopLeftRadius: '20px',
+            borderTopRightRadius: '20px',
             backgroundColor:'white',
             float: 'left' , /* 왼쪽으로 플로팅 */
             position:'fixed',
             left: '970px'
           }
         const leftContainer1 = {
-            height:'100px',
+          height:'120px',
             display: 'block',
             borderStyle: 'solid',
             borderWidth: 'thin',
+            borderTopLeftRadius: '20px',
+            borderTopRightRadius: '20px',
+            backgroundColor:'#E4E1E1',
+            borderLeftWidth: '2px',
+            borderRightWidth: '2px',
+            borderTopWidth: '2px',
             position:'static'
           }
         
@@ -169,10 +180,22 @@ class Search_Tag extends Component{
             height:'400px',
             display: 'block',
             borderStyle: 'solid',
-            borderWidth: 'thin',
+            borderWidth: 'thin',  
+            marginBottom: '10px',
+            borderLeftWidth: '2px',
+            borderRightWidth: '2px',
+            borderBottomWidth: '2px',
+            overflow:'auto',
             position:'static'
           }
 
+          const buttonStyle = {
+            width:'50px',
+            marginTop:'10px',
+            fontSize: '15px',
+            borderRadius: '5px',
+            backgroundColor: '#FFFFFF'
+          }
 
 
           const _lists = this.state.searchedTagList;
@@ -226,7 +249,10 @@ class Search_Tag extends Component{
         return(
             <aside style = {rightSidebar}>
                 <div style= {leftContainer1}>
-                    <h2>영상 태그를 검색하세요.</h2>		
+                    <h2 style={{
+                  textAlign: 'center',
+                  }
+                }>관심있는 해쉬태그</h2>		
                     <form  onSubmit = { function(e) {
                                 e.preventDefault();
                                 this.props.onSubmit(
@@ -237,24 +263,59 @@ class Search_Tag extends Component{
                                 this.clear_searchedTagList();
                             }.bind(this)} >
 
-                        <p><input 
+
+                        <p style={{
+                          textAlign: 'center'}
+                        }><input 
                             autocomplete="off"
                             type ="text" 
                             name="title"
                             size="35" 
-                            placeholder="태그를 검색하세요"
+                            placeholder="해쉬태그 검색"
                             id="tag_data"
+                            style={{
+                              textAlign: 'center',
+                            borderRadius: '50px',
+                            height: '30px',
+                            marginTop: '10px',}
+                            }
                             >
                             </input></p>
-                        <p> <input autocomplete="off" type = "submit" value = "검색"></input></p>
+
+                        <p style={{
+                  textAlign: 'center'}
+                }> <input autocomplete="off" type = "submit" value = "검색" style={buttonStyle}></input></p>
                     </form>
                 </div>
-                <div style = {leftContainer2}>
-                    <h2>관련 영상 태그 검색결과</h2>
+               
+                    <h2 style={{
+                  textAlign: 'center',
+                  borderStyle: 'solid',
+                  borderWidth: 'thin',
+                  backgroundColor:'#E4E1E1',
+                  borderLeftWidth: '2px',
+                  borderRightWidth: '2px',
+                  padding: '10px'
+                  }
+                }>검색 결과</h2>
+                 <div style = {leftContainer2}>
                     {returnList}
                     
                 </div>
-				        <div style = {leftContainer2}><h2>내가 선택한 영상 태그 목록</h2>
+
+				        <h2 style={{
+                  textAlign: 'center',
+                  borderStyle: 'solid',
+                  borderTopLeftRadius: '20px',
+                  borderTopRightRadius: '20px',
+                  borderWidth: 'thin',
+                  backgroundColor:'#E4E1E1',
+                  borderLeftWidth: '2px',
+                  borderRightWidth: '2px',
+                  borderTopWidth: '2px',
+                  padding: '10px'}
+                }>내가 고른 태그</h2>
+                <div style = {leftContainer2}>
                     {print_returnList}
                 </div>	
             </aside>

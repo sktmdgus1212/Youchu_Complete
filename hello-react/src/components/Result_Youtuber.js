@@ -8,7 +8,7 @@ class Result_Youtuber extends Component{
         this.state={
             finalIndex:0,
             result_YoutuberList:[
-                {image:'', kor_name: '', id:'', tag:[] , id_num:''},
+                {image:'/img/white.png', kor_name: '', id:'', tag:[] , id_num:''},
                 
               ]
         }
@@ -40,6 +40,7 @@ class Result_Youtuber extends Component{
             let values = Object.values(data);
             
             let index=0;
+            console.log(data);
 
             for(let i=0;i<keys;i++, index++){
               
@@ -97,6 +98,14 @@ class Result_Youtuber extends Component{
             left: '575px'
           }
 
+          const buttonStyle = {
+            width:'110px',
+            marginTop:'10px',
+            fontSize: '15px',
+            borderRadius: '5px',
+            backgroundColor: '#FFFFFF'
+          }
+
           const _lists = this.state.result_YoutuberList;
           const returnList = Object.values(_lists).map( list => {
             return(
@@ -117,13 +126,18 @@ class Result_Youtuber extends Component{
 
         return(
             <section style = {middle_space}> 
-                <h2>유투버 추천 결과</h2>
-                <input type = "button" value = "결과 확인하기" onClick = {function (){
+                <h2 style={{
+                  textAlign: 'center'}
+                }>유투버 추천 결과</h2>
+                <p style={{
+                  textAlign: 'center'}
+                }><input style={buttonStyle} type = "button" value = "결과 확인하기" onClick = {function (){
                  //함수넣기;
                  this.receive_result_list()
-                }.bind(this)}></input>
-                
+                }.bind(this)}></input></p>
+                <hr style={{marginTop: '10px'}}></hr>
                 {returnList}
+                
 
             </section>
         );

@@ -18,22 +18,21 @@ public class JDBC_TagToId {
 		}
 	
 	public int fun_tagtoid(String tag_name) throws SQLException{
-		int tag = 0;	
-		String sql = "SELECT CNT FROM TAG WHERE tag_name='"+tag_name+"'";
+		int cnt = 0;	
+		String sql = "SELECT CNT FROM TAG WHERE TAG_NAME='"+tag_name+"'";
 
 		Connection con = DriverManager.getConnection(db_info.getUrl(), db_info.getUid(), db_info.getPwd());
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(sql);
 
 		if (rs.next()) {
-			tag = rs.getInt("TAG");
+			cnt = rs.getInt("CNT");
 		}
 		
 		rs.close();	
-		st.close();
 		con.close();
 
-		return tag;
+		return cnt;
 		
 	}
 }
