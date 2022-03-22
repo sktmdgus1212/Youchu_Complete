@@ -20,19 +20,23 @@ public class JDBC_TagService {
 
 		public JSONObject get_tag_list(String tag) throws ClassNotFoundException, SQLException {
 			ArrayList<String> list = new  ArrayList<>();
-			String sql = "SELECT TAG_NAME FROM TAG WHERE TAG_NAME='"+tag+"'";
+			ArrayList<String> list_cnt = new  ArrayList<>();
+			String sql = "SELECT * FROM TAG WHERE TAG_NAME LIKE '%"+tag+"%'";
 			Connection con = DriverManager.getConnection(db_info.getUrl(), db_info.getUid(), db_info.getPwd());
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
+			String cnt;
 			String tag_name;
 			while (rs.next()) {
+				cnt = rs.getString("CNT");
 				tag_name = rs.getString("TAG_NAME");
+				list_cnt.add(cnt);
 				list.add(tag_name);
 			}
 			JSONObject json = new JSONObject();
 			
 			for(int i = 0 ; i < list.size() ; i++) {
-				json.put(i, list.get(i));
+				json.put(list_cnt.get(i), list.get(i));
 			}
 			rs.close();
 			st.close();

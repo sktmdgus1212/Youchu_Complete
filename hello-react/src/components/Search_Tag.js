@@ -23,7 +23,7 @@ class Search_Tag extends Component{
               url: '/search_tag',
               method: 'post',
               data: {
-                name: searchingFile
+                tag: searchingFile
               }, 
               baseURL: 'http://localhost:8080'
               //withCredentials: true
@@ -38,7 +38,7 @@ class Search_Tag extends Component{
         axios(
             {
               headers: {"Content-Type": "application/json"},
-              url: '/searched_tag',
+              url: '/searched_result_tag',
               method: 'post',
               baseURL: 'http://localhost:8080'
               //withCredentials: true
