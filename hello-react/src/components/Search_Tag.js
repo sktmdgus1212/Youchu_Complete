@@ -1,15 +1,31 @@
 import React, {Component} from'react';
 import Righttop from './minicomponents/Righttop';
 import axios from 'axios';
+import Rightbottom from './minicomponents/Rightbottom';
 class Search_Tag extends Component{
     constructor(props){
         super(props);
         this.state={
-            searchedTagList:[],
+          searchedTagList:
+          [
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''},
+             {cnt: '', tag: ''}
+             
+           ],
+
             searchedTagIndex:0,
-            fianlTagList:[],
+
+            finalTagList:[],
+
             finalTagIndex:0
         }
+        this.transmit_tag_data=this.transmit_tag_data.bind(this);
+        this.get_tag_Data=this.get_tag_Data.bind(this);
+        this. add_finalTagList=this. add_finalTagList.bind(this);
+
     }
     
     
@@ -48,18 +64,21 @@ class Search_Tag extends Component{
             
           })
           .then(function(data){
-
+            let key = Object.keys(data);
+            console.log(key);
             let keys = Object.keys(data).length;
             console.log("키의 숫자는: " + keys);
             let values = Object.values(data);
+            console.log("내용의 값은: " +values);
+
             let index=0;
 
             for(let i=0;i<keys;i++, index++){
-              
-                var newObject = new Object();
-
-                    this.state.searchedTagList[index] =values[i].tag;
-                    console.log(this.state.searchedTagList[index]);
+                    console.log(this.state.searchedTagList[index]?.cnt);
+                    this.state.searchedTagList[index].cnt=key[i];
+                    this.state.searchedTagList[index].tag=values[i];
+                    console.log(values[i]);
+                    //console.log(this.state.searchedTagList[index].tag);
 
             }
                     
@@ -69,7 +88,7 @@ class Search_Tag extends Component{
                     searchedTagIndex: index
                                         
                 })
-                console.log(this.state.finallist);
+                console.log(this.state.searchedTagList);
             
           }.bind(this));    
           
@@ -78,7 +97,8 @@ class Search_Tag extends Component{
     add_finalTagList(tag){
        
         console.log(tag);
-        let i = this.state.finallTagIndex;
+        let i = this.state.finalTagIndex;
+        console.log(i);
 
        
         this.state.finalTagList[i]=tag;
@@ -91,6 +111,11 @@ class Search_Tag extends Component{
 
          
 
+  }
+
+  clear_searchedTagList(){
+    this.setState({
+        searchedTagList:[]})
   }
     
     
@@ -130,7 +155,7 @@ class Search_Tag extends Component{
                      
                       onSubmit ={ function(tag){
                             console.log(tag);
-                            this.add_finalTagist(tag);
+                            this.add_finalTagList(tag);
                         
                         }.bind(this)} 
                 ></Righttop> 
@@ -138,12 +163,12 @@ class Search_Tag extends Component{
             );
           })
 
+
+
           const print_lists = this.state.finalTagList;
           const print_returnList = print_lists && print_lists.map( list => {
             return(
-              <Righttop>
-                      tag={list} 
-              </Righttop>
+              <Rightbottom tag={list}></Rightbottom>
             );
           } 
           )
@@ -160,7 +185,7 @@ class Search_Tag extends Component{
                                 );
                                 this.transmit_tag_data();
                                 this.get_tag_Data();
-                                //this.clear_finallist();
+                                this.clear_searchedTagList();
                             }.bind(this)} >
 
                         <p><input type ="text" 
@@ -178,8 +203,9 @@ class Search_Tag extends Component{
                     {returnList}
                     
                 </div>
-				<div style = {leftContainer2}><h2>내가 선택한 영상 태그 목록</h2>dd</div>	
+				        <div style = {leftContainer2}><h2>내가 선택한 영상 태그 목록</h2>
                     {print_returnList}
+                </div>	
             </aside>
         );
     }
