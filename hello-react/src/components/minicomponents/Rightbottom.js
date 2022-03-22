@@ -41,6 +41,21 @@ class Rightbottom extends Component{
             borderStyle:'dashed',
             float:'right'
         }
+
+        const btnStyle = {
+            fontFamily: "PoorStory-Regular",
+            color: "black",
+            background: "white",
+            padding: ".375rem .75rem",
+            border: "1px solid white",
+            borderRadius: ".25rem",
+            fontSize: "1.3rem",
+            fontWeight:"bold",
+            lineHeight: 1.5,
+            padding:'5px',
+            margin:'5px',
+            float:'left'
+          };
     
 
 
@@ -51,7 +66,7 @@ class Rightbottom extends Component{
             this.props.onSubmit(e.target.id.value);
             this.remove_tag_data(e.target.hidden.value);
         }.bind(this)}>
-        <div><input type = "submit" name = "id" value = {this.props.tag} ></input></div>
+        <div><input style={btnStyle} type = "submit" name = "id" value = {this.props.tag} ></input></div>
         <input type = "hidden" name = "hidden" value = {this.props.cnt}></input>
         </form>
 

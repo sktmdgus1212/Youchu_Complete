@@ -205,6 +205,8 @@ clear_finallist(){
             backgroundColor:'#e9e9e9',
             float: 'left', /* 왼쪽으로 플로팅 */
             marginLeft:'40px',
+            position:'fixed',
+            
             
           }
           const leftContainer1 = {
@@ -212,6 +214,8 @@ clear_finallist(){
             display: 'block',
             borderStyle: 'solid',
             borderWidth: 'thin',
+            position:'static',
+            
           }
           const leftContainer2 = {
             height:'400px',
@@ -219,6 +223,8 @@ clear_finallist(){
             borderStyle: 'solid',
             borderWidth: 'thin',
             overflow:'auto',
+            position:'static',
+            
             
           }
 
@@ -285,6 +291,7 @@ clear_finallist(){
                                     e.target.title.value
                                     
                                 );
+                                
                                 this.transmit_youtuber_data();
                                 this.getData();
                                 this.clear_finallist();
@@ -295,9 +302,10 @@ clear_finallist(){
                             size="35" 
                             placeholder="크리에이터 이름을 검색하세요"
                             id="search_data"
+                            autocomplete="off"
                             >
                             </input></p>
-                        <p> <input type = "submit" value = "검색"></input></p>
+                        <p> <input  autocomplete="off" type = "submit" value = "검색"></input></p>
                     </form>
                 </div>
 

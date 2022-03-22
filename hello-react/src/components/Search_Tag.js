@@ -151,14 +151,17 @@ class Search_Tag extends Component{
         const rightSidebar= {
             width: '525px',   /* 사이드바의 너비 */
             height:'900px',  /* 사이드바의 높이 */
-            backgroundColor:'#e9e9e9',
-            float: 'left'  /* 왼쪽으로 플로팅 */
+            backgroundColor:'white',
+            float: 'left' , /* 왼쪽으로 플로팅 */
+            position:'fixed',
+            left: '970px'
           }
         const leftContainer1 = {
             height:'100px',
             display: 'block',
             borderStyle: 'solid',
-            borderWidth: 'thin'
+            borderWidth: 'thin',
+            position:'static'
           }
         
         
@@ -166,7 +169,8 @@ class Search_Tag extends Component{
             height:'400px',
             display: 'block',
             borderStyle: 'solid',
-            borderWidth: 'thin'
+            borderWidth: 'thin',
+            position:'static'
           }
 
 
@@ -233,14 +237,16 @@ class Search_Tag extends Component{
                                 this.clear_searchedTagList();
                             }.bind(this)} >
 
-                        <p><input type ="text" 
+                        <p><input 
+                            autocomplete="off"
+                            type ="text" 
                             name="title"
                             size="35" 
                             placeholder="태그를 검색하세요"
                             id="tag_data"
                             >
                             </input></p>
-                        <p> <input type = "submit" value = "검색"></input></p>
+                        <p> <input autocomplete="off" type = "submit" value = "검색"></input></p>
                     </form>
                 </div>
                 <div style = {leftContainer2}>
