@@ -3,8 +3,8 @@ import axios from 'axios';
 
 class Righttop extends Component{
 
-    choose_tag_data(){ 
-        var searchingFile = document.getElementById("choose_tag_data").value; 
+    choose_tag_data(id){ 
+        var searchingFile = id;
         axios(
             {
               headers: {"Content-Type": "application/json"},
@@ -46,7 +46,7 @@ class Righttop extends Component{
                 }.bind(this)}>
 
                 <div> <input  id = "choose_tag_data" name = "id" type = "submit"  value={this.props.tag} ></input> </div>
-                <input type = "hidden" name = "hidden" value = {this.props.id_num}></input> 
+                <input type = "hidden" name = "hidden" value = {this.props.cnt}></input> 
            </form>
                
         
