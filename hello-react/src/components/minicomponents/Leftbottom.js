@@ -26,13 +26,17 @@ class Leftbottom extends Component{
     
         return(
             
-            <div   style = {st}>
+            <form   style = {st} onSubmit = {function(e){
+                e.preventDefault();
+                console.log(this);
+                this.props.onSubmit(e.target.id.value);
+            }.bind(this)}>
                 <img  style={Site}  src={this.props.image}></img>
-                <div style = {Site}> <input  id = "choose_data" style={{borderStyle:'none'}} name = "id" type = "text"  value={this.props.id} ></input> </div>
+                <div style = {Site}> <input  id = "choose_data"  name = "id" type = "submit"  value={this.props.id} ></input> </div>
                 <div style={Site}><input style={{borderStyle:'none'}} type="text" name = "kor_name" value = {this.props.kor_name} ></input></div>
                 <div style={ExtendedSite}><input style={{borderStyle:'none'}} size='35' type="text" name = "tag" value = {this.props.tag} ></input></div>
 
-            </div>
+            </form>
             
 
         );
