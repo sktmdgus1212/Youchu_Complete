@@ -174,9 +174,26 @@ class Search_Tag extends Component{
 
 
           const print_lists = this.state.finalTagList;
+          const onRemove = tag => {
+            
+            const nextArray = print_lists.filter(list=> list != tag);
+
+            this.setState({
+              finalTagList: nextArray,
+              finalTagIndex:this.state.finalTagIndex-1
+            })
+
+          }
+
           const print_returnList = print_lists && print_lists.map( list => {
             return(
-              <Rightbottom tag={list}></Rightbottom>
+              <Rightbottom 
+                tag={list}
+                 
+                onSubmit = {function(_mola){
+                        
+                onRemove(_mola);
+              }.bind(this)}></Rightbottom>
             );
           } 
           )

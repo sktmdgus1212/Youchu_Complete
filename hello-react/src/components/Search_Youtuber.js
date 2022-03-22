@@ -28,6 +28,12 @@ class Search_Youtuber extends Component{
             {image:'', kor_name: '', id:'', tag:[] },
             {image:'', kor_name: '', id:'', tag:[] },
             {image:'', kor_name: '', id:'', tag:[] },
+            {image:'', kor_name: '', id:'', tag:[] },
+            {image:'', kor_name: '', id:'', tag:[] },
+            {image:'', kor_name: '', id:'', tag:[] },
+            {image:'', kor_name: '', id:'', tag:[] },
+            {image:'', kor_name: '', id:'', tag:[] },
+            
           ],
 
             image:'',
@@ -172,6 +178,7 @@ clear_finallist(){
     {image:'', kor_name: '', id:'', tag:[] },
     {image:'', kor_name: '', id:'', tag:[] },
     {image:'', kor_name: '', id:'', tag:[] },
+    
   ] })
 }
    
@@ -238,7 +245,7 @@ clear_finallist(){
                       tag={list.tag} 
                       id_num={list.id_num}
                       onSubmit ={ function(image,id, kor_name,tag){
-                         console.log(id);
+                         
                         this.add_final_list(image,id,kor_name,tag);
                         
                         }.bind(this)} 
@@ -247,7 +254,19 @@ clear_finallist(){
             );
           })
 
+
           const print_lists = this.state.final_return_list;
+          const onRemove = id => {
+            const nextArray = print_lists.filter(list=>list.id != id);
+            
+           
+            this.setState({
+              final_return_list: nextArray,
+              final_return_index:this.state.final_return_index-1
+            })
+          }
+
+         
           const print_returnList = Object.values(print_lists).map( list => {
             return(
               <Leftbottom 
@@ -256,7 +275,10 @@ clear_finallist(){
                       id={list.id} 
                       kor_name={list.kor_name} 
                       tag={list.tag} 
-                     
+                      onSubmit = {function(_mola){
+                        
+                        onRemove(_mola);
+                      }.bind(this)}
                          ></Leftbottom> 
             );
           } 
