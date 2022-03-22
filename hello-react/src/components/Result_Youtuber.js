@@ -130,7 +130,7 @@ class Result_Youtuber extends Component{
             <section style = {middle_space}> 
                 <h2 style={{
                   textAlign: 'center'}
-                }>유투버 추천 결과</h2>
+                }>유튜버 추천 결과</h2>
                 <p style={{
                   textAlign: 'center'}
                 }><input style={buttonStyle} type = "button" value = "결과 확인하기" onClick = {function (){

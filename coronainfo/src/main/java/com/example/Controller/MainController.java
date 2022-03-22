@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.Entity.Youtuber;
 import com.example.Service.JDBC_FillMatrix;
 import com.example.Service.JDBC_IdToTag;
 import com.example.Service.JDBC_Recommend;
@@ -47,7 +45,7 @@ public class MainController {
 	String choosed_tag_name;
 	String delete_youtuber;
 	String delete_tag;
-	boolean empty_result = true;
+	boolean empty_result;
 	@Autowired
 	public MainController(Youtuber_db youtuber_db, JDBC_IdToTag idToTag, JDBC_TagSize jdbc_TagSize, JDBC_YoutuberSize jdbc_YoutuberSize, JDBC_FillMatrix fillMatrix, JDBC_Recommend jdbc_Recommend, JDBC_TagService jdbc_TagService, JDBC_TagToId jdbc_TagToId) {
 		this.youtuber_db = youtuber_db;
@@ -68,6 +66,7 @@ public class MainController {
 		youtuber_list = fillMatrix.fill_matrix(col, row);
 		tag_list = new int[row+1];
 		exec_list = new ArrayList<>();
+		empty_result = true;
 		return "home";
 	}
 	

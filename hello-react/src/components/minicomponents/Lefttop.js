@@ -73,7 +73,7 @@ class Lefttop extends Component{
                     
                     this.props.onSubmit(e.target.hidden2.value,e.target.id.value, e.target.kor_name.value,e.target.tag.value); 
                     this.choose_youtuber_data(e.target.hidden.value);
-                    alert("선택목록에 추가했습니다: "+e.target.id.value);
+                    
                     
                     }
                     
