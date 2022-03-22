@@ -72,7 +72,6 @@ class Search_Tag extends Component{
             console.log("내용의 값은: " +values);
 
             let index=0;
-
             for(let i=0;i<keys;i++, index++){
                     console.log(this.state.searchedTagList[index]?.cnt);
                     this.state.searchedTagList[index].cnt=key[i];
