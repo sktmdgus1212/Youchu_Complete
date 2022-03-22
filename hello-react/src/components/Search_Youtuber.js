@@ -201,12 +201,14 @@ clear_finallist(){
   
         const leftSidebar= {
             width: '525px',   /* 사이드바의 너비 */
-            height:'900px',  /* 사이드바의 높이 */
+             
             float: 'left', /* 왼쪽으로 플로팅 */
             marginLeft:'40px',
             borderTopLeftRadius: '20px',
             borderTopRightRadius: '20px',
-            position:'fixed',
+            position:'static',
+            height:'100%',
+            
           }
           const leftContainer1 = {
             height:'120px',

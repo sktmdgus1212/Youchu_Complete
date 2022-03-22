@@ -153,13 +153,15 @@ class Search_Tag extends Component{
 
         const rightSidebar= {
             width: '525px',   /* 사이드바의 너비 */
-            height:'900px',  /* 사이드바의 높이 */
             borderTopLeftRadius: '20px',
             borderTopRightRadius: '20px',
             backgroundColor:'white',
             float: 'left' , /* 왼쪽으로 플로팅 */
-            position:'fixed',
-            left: '970px'
+            position:'absolute',
+            left: '970px',
+            //height:'100%'
+
+            
           }
         const leftContainer1 = {
           height:'120px',
