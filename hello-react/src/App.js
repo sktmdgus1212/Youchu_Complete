@@ -27,7 +27,7 @@ function App() {
   );
  
   return (
-    <div className="App">
+    <div  className="App">
       {testStr}
     <Search_Youtuber onSubmit = {function(_title){
               console.log(_title);
