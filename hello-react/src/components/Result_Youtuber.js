@@ -93,7 +93,9 @@ class Result_Youtuber extends Component{
             width: '390px',  /* 본문의 너비 */
             height:'900px',   /* 본문의 높이 */
             backgroundColor: 'white',
-            float: 'left'  /* 왼쪽으로 플로팅 */
+            float: 'left',  /* 왼쪽으로 플로팅 */
+            position:'fixed',
+            left: '575px'
           }
 
           const buttonStyle = {
@@ -136,13 +138,6 @@ class Result_Youtuber extends Component{
                 <hr style={{marginTop: '10px'}}></hr>
                 {returnList}
                 
-
-
-
-
-
-
-
 
             </section>
         );

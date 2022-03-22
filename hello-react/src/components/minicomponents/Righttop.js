@@ -33,6 +33,20 @@ class Righttop extends Component{
             backgroundColor:'white'
             
         }*/}
+
+        const btnStyle = {
+          fontFamily: "PoorStory-Regular",
+          color: "black",
+          background: "white",
+          padding: ".375rem .75rem",
+          border: "1px solid white",
+          borderRadius: ".25rem",
+          fontSize: "1.5rem",
+          fontWeight:"bold",
+          lineHeight: 1.5,
+          padding:'5px',
+          margin:'10px'
+        };
         
         
         return(
@@ -47,7 +61,7 @@ class Righttop extends Component{
                 
                 }.bind(this)}>
 
-                <div> <input  id = "choose_tag_data" name = "id" type = "submit"  value={this.props.tag} ></input> </div>
+                <div> <input  style = {btnStyle} id = "choose_tag_data" name = "id" type = "submit"  value={this.props.tag} ></input> </div>
                 <input type = "hidden" name = "hidden" value = {this.props.cnt}></input> 
            </form>
                

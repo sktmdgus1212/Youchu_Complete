@@ -154,9 +154,12 @@ class Search_Tag extends Component{
         const rightSidebar= {
             width: '525px',   /* 사이드바의 너비 */
             height:'900px',  /* 사이드바의 높이 */
-            float: 'left'  /* 왼쪽으로 플로팅 */,
             borderTopLeftRadius: '20px',
             borderTopRightRadius: '20px',
+            backgroundColor:'white',
+            float: 'left' , /* 왼쪽으로 플로팅 */
+            position:'fixed',
+            left: '970px'
           }
         const leftContainer1 = {
           height:'120px',
@@ -169,6 +172,7 @@ class Search_Tag extends Component{
             borderLeftWidth: '2px',
             borderRightWidth: '2px',
             borderTopWidth: '2px',
+            position:'static'
           }
         
         
@@ -182,6 +186,7 @@ class Search_Tag extends Component{
             borderRightWidth: '2px',
             borderBottomWidth: '2px',
             overflow:'auto',
+            position:'static'
           }
 
           const buttonStyle = {
@@ -258,9 +263,12 @@ class Search_Tag extends Component{
                                 this.clear_searchedTagList();
                             }.bind(this)} >
 
+
                         <p style={{
-                  textAlign: 'center'}
-                }><input type ="text" 
+                          textAlign: 'center'}
+                        }><input 
+                            autocomplete="off"
+                            type ="text" 
                             name="title"
                             size="35" 
                             placeholder="해쉬태그 검색"
@@ -273,9 +281,10 @@ class Search_Tag extends Component{
                             }
                             >
                             </input></p>
+
                         <p style={{
                   textAlign: 'center'}
-                }> <input type = "submit" value = "검색"  style={buttonStyle}></input></p>
+                }> <input autocomplete="off" type = "submit" value = "검색" style={buttonStyle}></input></p>
                     </form>
                 </div>
                

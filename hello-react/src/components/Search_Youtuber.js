@@ -206,6 +206,7 @@ clear_finallist(){
             marginLeft:'40px',
             borderTopLeftRadius: '20px',
             borderTopRightRadius: '20px',
+            position:'fixed',
           }
           const leftContainer1 = {
             height:'120px',
@@ -218,8 +219,8 @@ clear_finallist(){
             borderLeftWidth: '2px',
             borderRightWidth: '2px',
             borderTopWidth: '2px',
-         }
-
+            position:'static',
+          }
           const leftContainer2 = {
             height:'400px',
             display: 'block',
@@ -230,6 +231,9 @@ clear_finallist(){
             borderLeftWidth: '2px',
             borderRightWidth: '2px',
             borderBottomWidth: '2px',
+            position:'static',
+            
+            
           }
           
 
@@ -307,6 +311,7 @@ clear_finallist(){
                                     e.target.title.value
                                     
                                 );
+                                
                                 this.transmit_youtuber_data();
                                 this.getData();
                                 this.clear_finallist();
@@ -325,11 +330,12 @@ clear_finallist(){
                             height: '30px',
                           marginTop: '10px',}
                             }
+                            autocomplete="off"
                             >
                             </input></p>
                         <p style={{
                   textAlign: 'center'}
-                }> <input type = "submit" value = "검색" style={buttonStyle}></input></p>
+                }> <input autocomplete="off" type = "submit" value = "검색" style={buttonStyle}></input></p>
                     </form>
                 </div>
 
